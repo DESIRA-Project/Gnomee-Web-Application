@@ -1,0 +1,90 @@
+<div *ngIf="triggerModal">
+  <ng-template class="modal fade" let-modal id="userBackgroundModal" #userBackgroundFeedbackContent tabindex="-1"
+    role="dialog" aria-labelledby="filterModalTitle" aria-hidden="true">
+    <div class="modal-dialog-scrollable" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <img src="{{data.cookie_modal.logo.file}}" width="{{data.cookie_modal.logo.w}}"
+            height="{{data.cookie_modal.logo.h}}" />
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeModal()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" *ngIf="!onSubmit; else onSubmitBlock">
+          <div>
+            <h5 class="modal-title" id="cookieModalTitle">{{title}}</h5>
+            <span class="row col">{{text}}</span>
+
+
+            <span class="container dropdown" *ngIf="options !== null">
+
+
+              <div class="form-check" *ngFor="let option of options; let i = index">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault_{{i}}"
+                   (click)="selectOption(i)">
+                <label class="form-check-label" for="flexRadioDefault_{{i}}"      (click)="selectOption(i)" style="cursor:pointer;">
+                  {{option.value}}
+                </label>
+              </div>
+
+
+            </span>
+          </div>
+
+          <div class="container" *ngIf="options === null">
+            <div class="row justify-content-center">
+              <div class="col-sm-auto">
+                <div class="spinner-border" role="status">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <br>
+          <br>
+          <br>
+
+        </div>
+
+        <ng-template #onSubmitBlock>
+          
+          <div class="container" *ngIf="!resultReceived;else resultReceivedBlock">
+            <br>
+            <br>
+  
+            <div class="row justify-content-center">
+              <div class="col-sm-auto">
+                <div class="spinner-border" role="status">
+                </div>
+              </div>
+            </div>
+            <br>
+            <br>
+  
+          </div>
+
+          <ng-template #resultReceivedBlock>
+            <br>
+            <div class="container">
+              <div class="row justify-content-center">
+                <div class="col-sm-auto">
+                <span>Thanks for your response!</span>
+                </div>
+              </div>
+            </div>
+            <br>
+            <br>
+
+          </ng-template>
+        </ng-template>
+
+        <div class="modal-footer" *ngIf="!onSubmit">
+          <button type="button" class="btn btn-secondary btn-success btn-sm cookie-button" data-dismiss="modal"
+            (click)="saveUserBackground()" [disabled]="selection === null">Submit</button>
+        </div>
+      </div>
+
+
+    </div>
+  </ng-template>
+</div>

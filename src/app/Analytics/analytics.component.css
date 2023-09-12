@@ -1,0 +1,23 @@
+button.filter {
+  background-color: #089C89 !important;
+  border-color: #089C89;
+  background-image: linear-gradient(to right, #089C89 , #07C19A) !important;
+}
+
+button.filter:hover {
+  filter: brightness(90%);
+}
+
+button.reset {
+}
+
+button.reset:hover {
+  color: #fff;
+  background-color: #5a6268;
+  border-color: #545b62;
+}
+
+.toolImg {
+  width: 50px;
+  height: 50px;
+}

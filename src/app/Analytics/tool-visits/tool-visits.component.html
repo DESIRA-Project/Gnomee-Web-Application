@@ -1,0 +1,88 @@
+<div class="container">
+
+  <div class="row">
+    <div class="col">
+      <p class="font-weight-bold text-center">{{this.title}}</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <p class="font-weight-light text-center">{{this.description}}</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <div class="scrollable">
+        <table class="table table-borderless">
+          <thead>
+          <tr>
+            <th scope="col">Digital Tool Name </th>
+            <th scope="col">Number of Visits</th>
+          </tr>
+          </thead>
+
+          <tbody>
+          <tr *ngFor="let toolVisit of toolVisits">
+            <td>
+              <a class="font-weight-light" routerLink="/tool/{{toolVisit.id}}">{{toolVisit.name}}</a>
+            </td>
+            <td>
+              {{toolVisit.count}}
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <form>
+    <div class="form-row justify-content-center mt-3 mb-lg-n3">
+  <!--<form class="form-inline">-->
+    <!--<div class="row justify-content-center justify-content-lg-start">-->
+
+      <!-- Min -->
+      <div class="col col-lg-2">
+        <div class="form-group">
+          <div class="input-group">
+            <label for="min" class="my-auto">Min</label>
+            <input id="min" name="min" class="form-control mx-3" [(ngModel)]="minViews">
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Max -->
+      <div class="col col-lg-2">
+        <div class="form-group">
+          <div class="input-group">
+            <label for="max" class="my-auto">Max</label>
+            <input id="max" name="max" [(ngModel)]="maxViews" class="form-control mx-3">
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Break lines at md breakpoint and smaller -->
+      <div class="w-100 d-lg-none d-block"></div>
+
+
+      <div class="col-auto ml-lg-2">
+
+        <div class="row justify-content-center justify-content-lg-start">
+          <div class="col-auto">
+            <button (click)="filter()" class="btn btn-primary filter">Filter</button>
+          </div>
+          <div class="col-auto">
+            <button (click)="reset()" class="btn btn-secondary reset">Reset</button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </form>
+
+</div>
+

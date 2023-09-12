@@ -1,0 +1,59 @@
+<div class="card shadow-lg" *ngIf="!_closed; else mobileBlock">
+   <div class="card-header gnomeeFilter">
+      Filters
+   </div>
+
+   <div class="card-body" *ngIf="_parent.finishedLoading(); else spinnerBlock">
+      <div *ngFor="let datum of data">
+         <div *ngIf="datum.data.type === 'list'; else elseBlock">
+            <options-list [parent]="this" [data]="datum.data" [name]="datum.data.repr" [toggleable]="_closed" [description]="datum.data.description"></options-list>
+         </div>
+         <ng-template #elseBlock>
+            <div *ngIf="datum.data.type === 'tree'">
+               <options-tree [parent]="this" [nodes]="datum.data" [name]="datum.data.repr" [description]="datum.data.description"></options-tree>
+            </div>
+         </ng-template>
+      </div>
+   </div>
+
+   <ng-template #spinnerBlock>
+      <div class="card-body" *ngIf="_parent.finishedLoading() === false">
+         <div class="container">
+            <div class="row justify-content-center">
+               <div class="col-sm-auto">
+                  <div class="spinner-border" role="status">
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </ng-template>
+</div>
+
+<ng-template #mobileBlock>
+   <div  *ngIf="_parent.finishedLoading(); else spinnerBlockMobile" >
+      <div *ngFor="let datum of data; let i = index">
+         <div *ngIf="datum.data.type === 'list'; else elseBlock">
+            <options-list [parent]="this" [data]="datum.data" [name]="datum.data.repr" [toggleable]="_closed" [id]="i" [description]="datum.data.description"></options-list>
+         </div>
+         <ng-template #elseBlock>
+            <div *ngIf="datum.data.type === 'tree'">
+               <options-tree [parent]="this" [nodes]="datum.data" [name]="datum.data.repr" [toggleable]="_closed" [id]="i" [description]="datum.data.description"></options-tree>
+            </div>
+         </ng-template>
+      </div>
+   </div>
+
+   <ng-template #spinnerBlockMobile>
+      <div  *ngIf="_parent.finishedLoading() === false">
+         <div class="container">
+            <div class="row justify-content-center">
+               <div class="col-sm-auto">
+                  <div class="spinner-border" role="status">
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </ng-template>
+</ng-template>

@@ -1,0 +1,5 @@
+<!-- Interactions between human and tool -->
+<div class="d-flex" *ngIf="keywords.data.data && keywords.data.data.length > 0">
+  <span class="attributeName mr-2">Keywords: </span>
+  <horizontal-attribute-list class="w-100" [pageData]="pageData" [showAttributeName]="false" [parent]="_parent" [data]="keywords"></horizontal-attribute-list>
+</div>

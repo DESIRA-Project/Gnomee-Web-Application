@@ -1,0 +1,49 @@
+<div class="h-100">
+  <div class="card mb-0 border-white mb-2">
+    <div class="card-body">
+
+      <div class="row">
+
+        <div class="col-12 col-lg">
+          <!-- Application scenarios -->
+          <application-scenario-holder [onlyShowTaxonomyLevel]="2" [pageData]="pageData" [parent]="_parent"></application-scenario-holder>
+        </div>
+
+        <div class="col-12 col-lg">
+          <!-- Physical digital connections -->
+          <div class="attributeName">Connection between digital and physical objects</div>
+          <horizontal-attribute-list [pageData]="pageData" [showAttributeName]="false" [parent]="this" [data]="physicalDigitalConnections"></horizontal-attribute-list>
+        </div>
+
+      </div>
+
+      <div class="row">
+
+        <div class="col-12 col-lg">
+          <!-- Human work replacement extent -->
+          <div class="attributeName">Human Work Replacement </div>
+          <div class="attributeValue">{{ humanWorkReplacementExtend.data.data }}</div>
+        </div>
+
+        <div class="col-12 col-lg">
+          <!-- Interactions between human and tool -->
+          <ng-container *ngIf="interactionsBetweenHumanAndTool.data.data && interactionsBetweenHumanAndTool.data.data.length > 0">
+            <div class="attributeName">Interactions Between Human And Tool</div>
+            <horizontal-attribute-list [pageData]="pageData" [showAttributeName]="false" [parent]="this" [data]="interactionsBetweenHumanAndTool"></horizontal-attribute-list>
+          </ng-container>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Date added -->
+  <div *ngIf="dateAdded.data.data > 0 || dateModified.data.data > 0" class="ml-2">
+    <span *ngIf="dateAdded.data.data > 0" class="text-secondary added-at">Added at: {{ dateAdded.data.data | date }}</span>
+    <span *ngIf="dateAdded.data.data > 0" class="mr-5 d-block d-md-inline"></span>
+    <span *ngIf="dateModified.data.data > 0" class="text-secondary added-at">Last modified at: {{ dateModified.data.data | date }}</span>
+  </div>
+
+</div>

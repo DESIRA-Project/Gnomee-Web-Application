@@ -1,0 +1,168 @@
+<div *ngIf="!viewIsMobile;else mobileBlock">
+    <div class="c-wrapper ">
+
+        <header class="c-header w-100 border-1 kbtHeader sticky-top" *ngIf="pageData !== null" style="display:unset;">
+            <div>
+                 <kbt-navbar [currentPage]="'Search'"></kbt-navbar>
+            </div>
+        </header>
+
+
+        <div class="c-body" style="background-color: '#d1d1d124';">
+
+            <main>
+                
+                <kbt-breadcrumb [currentPage]="'search'"></kbt-breadcrumb>
+    
+                <div class="container-fluid">
+
+                    <div class="row" style="padding-top:2%;">
+                        <div class="col-3-auto" style="padding-left:1%;">
+                            <tool-filter-holder [parent]="this"></tool-filter-holder>
+                        </div>
+
+                        <div class="col">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col">
+                                        <tool-term-search [parent]="this"></tool-term-search>
+                                    </div>
+                                </div>
+
+                                <div class="row" style="padding-bottom:1%;">
+                                    <div class="col" style="padding-bottom:0%;">
+                                        <selected-attributes [parent]="this"></selected-attributes>
+                                    </div>
+                                </div>
+
+                                <div class="row justify-content-center" style="padding-bottom:2%;">
+                                    <div class="col-0">
+                                        <result-counter [parent]="this"></result-counter>
+                                    </div>
+
+                                    <div class="col-0">
+                                        <tool-result-size-setter [parent]="this"></tool-result-size-setter>
+                                    </div>
+                                    <div class="col-0">
+                                        <tool-sorting [parent]="this"></tool-sorting>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col">
+                                        <tool-main-view [parent]="this" [pageData]="pageData"></tool-main-view>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+
+        </div>
+
+    </div>
+
+</div>
+
+<ng-template #mobileBlock>
+<div >
+
+    <span *ngIf="dataReady">
+         <tool-filter-modal [parent]="this"></tool-filter-modal>
+    </span>
+    <div *ngIf="pageData !== null && !filterModalOpen && !anotherModalIsOpen()" (click)="toggleFilterModal();">
+        <!--        <img class="sticky" src="{{pageData.logo}}">-->
+        <!--   <i class="bi bi-filter-circle-fill sticky"></i> -->
+        <img src="assets/filter-circle-fill.svg" class="sticky filter-green" width="30" height="30" />
+
+    </div>
+
+    <div class="c-wrapper">
+
+        <header class="c-header border-1 kbtHeader sticky-top" *ngIf="pageData !== null">
+            <div>
+                 <kbt-navbar [currentPage]="'Search'"></kbt-navbar>
+            </div>
+        </header>
+
+
+        <div class="c-body" style="background-color: '#d1d1d124';">
+
+            <main>
+                <kbt-breadcrumb [currentPage]="'search'"></kbt-breadcrumb>
+                
+                <div class="container-fluid">
+
+                    <div class="row" style="padding-top:2%;">
+
+                        <div class="col">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <tool-term-search [parent]="this"></tool-term-search>
+                                    </div>
+                                </div>
+                                <div class="row" [ngStyle]="{'padding-bottom': hasFilterData ? '5%' : '0'}">
+
+                                    <div class="col" style="padding-bottom:0%;">
+                                        <selected-attributes [parent]="this"></selected-attributes>
+                                    </div>
+                                </div>
+
+                            <!--    <div class="row card justify-content-center" style="padding-bottom:2%;">
+                                    <div class="col-4">
+                                        <result-counter [parent]="this"></result-counter>
+                                    </div>
+
+                                    <div class="col-4">
+                                        <tool-result-size-setter [parent]="this"></tool-result-size-setter>
+                                    </div>
+                                    <div class="col-4">
+                                        <tool-sorting [parent]="this"></tool-sorting>
+                                    </div>
+
+                                </div>-->
+
+                                <div class="card">
+                                <div class="card-body pt-1">
+                                    <div class="container px-0">
+                                        <div class="row justify-content-center">
+                                            <result-counter [parent]="this"></result-counter>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-0">
+                                                <tool-result-size-setter [parent]="this"></tool-result-size-setter>
+                                            </div>
+                                            <div class="col">
+                                                <tool-sorting [parent]="this"></tool-sorting>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                              </div>
+
+                                <div class="row">
+                                    <div class="col" *ngIf="dataReady == true && paginationReady == true">
+                                        <tool-main-view [parent]="this" [pageData]="pageData"></tool-main-view>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+</ng-template>
+
+<cookie-banner></cookie-banner>    
+<kbt-footer></kbt-footer>

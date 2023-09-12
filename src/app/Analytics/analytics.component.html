@@ -1,0 +1,129 @@
+<div class="container">
+
+  <div class="row" *ngIf="userHasPermission('view_user_analytics') || userHasPermission('view_all_analytics')">
+    <div class="col">
+      <div class="container-fluid p-5">
+        <div class="card p-2 shadow-lg">
+          <div class="card-body">
+
+            <app-tool-relation-graph></app-tool-relation-graph>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row"  *ngIf="userHasPermission('view_all_analytics')">
+    <div class="col">
+      <div class="container-fluid p-5">
+        <div class="card p-2 shadow-lg">
+          <div class="card-body">
+
+            <app-filter-indices-usage></app-filter-indices-usage>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row"  *ngIf="userHasPermission('view_all_analytics')">
+    <div class="col">
+      <div class="container-fluid p-5">
+        <div class="card p-2 shadow-lg">
+          <div class="card-body">
+
+            <app-filter-value-frequency></app-filter-value-frequency>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row"  *ngIf="userHasPermission('view_all_analytics')">
+    <div class="col">
+      <div class="container-fluid p-5">
+        <div class="card p-2 shadow-lg">
+          <div class="card-body">
+
+            <app-search-terms></app-search-terms>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row"  *ngIf="userHasPermission('view_all_analytics')">
+    <div class="col">
+      <div class="container-fluid p-5">
+        <div class="card p-2 shadow-lg">
+          <div class="card-body">
+
+            <app-tool-visits></app-tool-visits>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row"  *ngIf="userHasPermission('view_all_analytics')">
+    <div class="col">
+      <div class="container-fluid p-5">
+        <div class="card p-2 shadow-lg">
+          <div class="card-body">
+
+            <app-browsed-app-scenarios></app-browsed-app-scenarios>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row"  *ngIf="userHasPermission('view_all_analytics')">
+    <div class="col">
+      <div class="container-fluid p-5">
+        <div class="card p-2 shadow-lg">
+          <div class="card-body">
+
+            <app-browsed-filter-path></app-browsed-filter-path>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row"  *ngIf="userHasPermission('view_all_analytics')">
+    <div class="col">
+      <div class="container-fluid p-5">
+        <div class="card p-2 shadow-lg">
+          <div class="card-body">
+
+            <app-most-popular-value-in-filters></app-most-popular-value-in-filters>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row"  *ngIf="userHasPermission('view_all_analytics')">
+    <div class="col">
+      <div class="container-fluid p-5">
+        <div class="card p-2 shadow-lg">
+          <div class="card-body">
+
+            <app-visitor-countries></app-visitor-countries>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

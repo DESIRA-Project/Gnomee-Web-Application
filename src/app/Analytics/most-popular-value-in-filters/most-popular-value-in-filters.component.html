@@ -1,0 +1,77 @@
+<div class="container">
+
+  <div class="row">
+    <div class="col">
+      <p class="font-weight-bold text-center">{{title}}</p>
+    </div>
+  </div>
+  <div class="row" *ngIf="description">
+    <div class="col">
+      <p class="font-weight-light text-center">{{description}}</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <hr>
+    </div>
+  </div>
+
+
+  <div class="row" *ngIf="dataReady">
+    <div class="col-lg" *ngFor="let entry of data">
+
+      <div class="row my-3 mb-lg-3 my-lg-2 h-25">
+        <div class="col col-md-2 col-lg-5 col-xl-4">
+
+          <!--Icon-->
+          <div class="row">
+            <div class="col text-center text-md-left">
+              <img class="toolImg" src="{{config[entry.attribute].icon}}">
+            </div>
+          </div>
+
+          <!--Title on smaller than md-->
+          <div class="row d-md-none mb-2">
+            <div class="col text-center text-md-left">
+              {{entry.title}}
+            </div>
+          </div>
+
+          <!--Data on smaller than md-->
+          <div class="row d-md-none">
+            <div class="col text-center text-md-left">
+              <h6>{{entry.value}}<br>(used {{entry.count}} times)</h6>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="d-none d-md-block col col-lg-7 col-xl-8">
+          <div class="row">
+
+            <!--Title on md and larger-->
+            <div class="col-5 col-md-4 col-lg">
+              {{entry.title}}
+            </div>
+
+            <!--Data on md to lg-->
+            <div class="col d-lg-none">
+              <h6>{{entry.value}}<br> (used {{entry.count}} times)</h6>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+      <!--Data on lg and larger-->
+      <div class="d-none d-lg-inline row my-auto">
+        <div class="col text-center">
+          <h6 class="card-text font-italic">{{entry.value}}<br>(used {{entry.count}} times)</h6>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

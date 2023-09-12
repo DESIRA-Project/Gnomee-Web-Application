@@ -1,0 +1,119 @@
+<span *ngIf="!shouldProceedIsShowingTheBanner();else showBannerBlock "> 
+    
+</span>
+
+<ng-template #showBannerBlock>
+<div class="container p-2 cookie-message cookie-banner" *ngIf="showBanner()">
+    <div class="row justify-content-center" *ngIf="data !== null">
+        <div class="col-8">
+            {{data.notice_text}}
+        </div>
+
+        <div class="container col-sm">
+        <div class="row  justify-content-center p-1">
+        <div class="col-0">
+               <button type="button" class="btn btn-success btn-sm" (click)="acceptAllCookies()">Accept all</button>
+        </div>
+
+        <div class="col-0 pl-2">
+            <button type="button" class="btn btn-danger btn-sm" (click)="rejectAllCookies()">Reject all</button>
+        </div>
+
+        <div class="col-0 pl-2">
+            <button type="button" class="btn btn-secondary btn-sm" (click)="openCookiesModal()">Cookie Settings</button>
+        </div>
+        </div>
+    </div>
+
+    </div>
+</div>
+
+<div >
+<ng-template class="modal fade" *ngIf="data !== null" let-modal id="cookieModal" #cookieBannerContent tabindex="-1" 
+role="dialog" aria-labelledby="filterModalTitle" aria-hidden="true"
+>
+    <div class="modal-dialog-scrollable" role="document">
+      <div class="modal-content" >
+        <div class="modal-header">
+                <img  src="{{data.cookie_modal.logo.file}}" width="{{data.cookie_modal.logo.w}}" height="{{data.cookie_modal.logo.h}}">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeModal()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" *ngIf="sentences.length > 0">
+           <div> <h5 class="modal-title" id="cookieModalTitle">{{data.cookie_modal.title}}</h5>
+           </div>
+            <div *ngFor="let p of sentences">
+                <div [innerHTML]="p" class="content"></div>
+                <br>                
+            </div>
+
+            <button type="button" class="btn btn-success btn-sm cookie-button" (click)="acceptAllCookies()">Allow All</button>
+            <br>
+            <br>
+            <br>
+
+            <div>
+                <h5>Cookie Settings</h5>
+                <div class="container"  
+                *ngFor="let c of data.cookie_modal.cookie_settings.cookie_categories; let i = index"                
+                >
+                 <div class="row cookie-category clickable cookie-table p-3"
+                 (click)="toggleCookieCategory(i)"
+                 [ngClass]="{'selected-row':cookieCategoryToggleState[i] === true}"
+                 > 
+
+                    <div class="col-0" *ngIf="cookieCategoryToggleState[i] === false; else toggleCookieCategoryBlock">                         
+                        <i class="fas fa-plus"></i>
+                    </div> 
+
+                    <ng-template #toggleCookieCategoryBlock>
+                        <div class="col-0">                         
+                            <i class="fas fa-minus"></i>
+                        </div> 
+                    </ng-template>
+                     
+                    <div class="col-7 cookie-name"> 
+                        {{c.name}}
+                    </div> 
+
+                    <div class="col-4 always-enabled" *ngIf="c.always_enabled === true; else defaultDisabledBlock"> 
+                        Always Enabled
+                    </div> 
+
+                    <ng-template #defaultDisabledBlock>
+                        <div class="col-4" style="height:0px;">
+                            <label class="c-switch gnomeeSwitch c-switch-pill c-switch-sm">
+                                <input type="checkbox" class="c-switch-input " (click)="switchCookieState(i)" [checked]="cookieCategoryInability[i] === true">
+                                <span class="c-switch-slider  "></span>
+                              </label>
+                        </div>
+                    </ng-template>
+                    
+                    </div>   
+
+                    <div class="row collapse cookie-table cookie-description" [ngClass]="{'show selected-row-content':cookieCategoryToggleState[i] === true}"
+                    id="collapseCookieCategory{{i}}" >
+                           <div class="container">
+                               <div class="row">
+                                   <div class="col ">{{c.description}}</div>
+                               </div>
+
+<!--                               <div class="row">
+                                   <button type="col button" (click)="switchMode(1)" class="btn btn-link">Cookie Details</button>
+                               </div> -->
+                           </div>
+                     </div>
+
+                
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary btn-success btn-sm cookie-button" data-dismiss="modal" (click)="saveCookieSettings()">Save Settings</button>
+        </div>
+      </div>
+    </div>
+</ng-template>
+</div>
+</ng-template>

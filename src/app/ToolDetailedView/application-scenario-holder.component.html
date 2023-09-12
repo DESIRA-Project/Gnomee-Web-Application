@@ -1,0 +1,12 @@
+<!--<div class="card mb-2 h-100 border-white" *ngIf="initialized">-->
+<!--   <div class="card-body">-->
+<div *ngIf="initialized">
+  <div *ngFor="let list of attributeList; let i = index">
+    <clickable-badge-list
+      *ngIf="onlyShowTaxonomyLevel === undefined || i === onlyShowTaxonomyLevel"
+      [pageData]="pageData"
+      [data]="list">
+    </clickable-badge-list>
+    <!--</div>-->
+  </div>
+</div>

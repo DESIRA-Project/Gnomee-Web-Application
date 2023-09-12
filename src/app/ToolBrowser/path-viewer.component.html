@@ -1,0 +1,66 @@
+<div *ngIf="_pathIterator !== null && viewLoaded;else spinnerBlock" class="container card-container-style">
+    <!--   <span (click)="goBack()"><a href="">Go back</span> -->
+    <div class="row justify-content-between gapBetweenRows">
+<!--        <button class="col" type="button" *ngIf="canVisitParent" class="btn btn-link" (click)="accessParent()">Go
+            back</button> -->
+
+            <div class="col-6" style="padding-left: 30px;cursor:pointer;"  *ngIf="canVisitParent" (click)="accessParent()" >
+                <i class='fas fa-arrow-alt-circle-left goBackButton'
+
+                ></i>
+
+               <span style="font-family:'Oswald';" placement="bottom" ngbTooltip="Go Back" >
+                Back
+               </span>
+               </div>
+
+               <div class="col-md-2" *ngIf="onDataNode() && values !== null && values.length > 0 && allResultsSize !== -1">
+                      Showing {{this.values.length}} of {{allResultsSize}}
+               </div>
+
+    </div>
+
+    <div class="row justify-content-center">
+        <span class='browse-by'>
+            <h4 class="contentTitle"> Browse by:
+                <span *ngIf="viewLoaded">
+                    {{getCurrentCategory()}}
+                </span>
+            </h4>
+            <span *ngIf="viewLoaded">
+                <category-hierarchy-viewer [hierarchy]="getCurrentHierarchy()" [style]="getStyle()"></category-hierarchy-viewer>
+            </span>
+
+        </span>
+
+        <div class="container card-container-center card-container-position">
+            <div class="row justify-content-center" *ngFor="let row of getRows()">
+                <div class="col-sm-6 col-md-4" style="cursor:pointer;" *ngFor="let col of getColumn(row)">
+                   <node-viewer [nodeData]="getDataRow(row,col)" [parent]="this" [row]="row" [col]="col"></node-viewer>
+                </div>
+            </div>
+
+            <div class="row justify-content-end gapBetweenRowsTop align-container" *ngIf="onDataNode()">
+                <div class="col-sm-5" *ngIf="hasNextPage">
+                    <button type="button" class="btn btn-primary btn-sm gnomeeButton" (click)="fetchNextBatch()">Show more</button>
+                </div>
+                <div class="col-md-2 gapBetweenCols" *ngIf="onDataNode() && values !== null && values.length > 0 && allResultsSize !== -1">
+                    Showing {{this.values.length}} of {{allResultsSize}}
+             </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #spinnerBlock>
+    <div class="card-body">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-0">
+                    <div class="spinner-border" role="status">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

@@ -1,0 +1,111 @@
+/*.kbtFooter  > *{
+    font-family: 'Oswald';
+}
+*/
+::ng-deep footer * {
+    font-family: "Oswald" !important;
+  }
+
+
+/*footer.sticky{
+    position: -webkit-sticky;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 10000;
+}*/
+
+
+footer.mobileSizeFooter{
+    display:none;
+}
+
+footer.kbtFooter{
+    padding-left:0px;
+    background-color:white;
+    font-family: "Oswald" !important;
+}
+
+*.smallTopSpace{
+    padding-top:5px;
+}
+
+*.smallLeftSpace{
+    padding-left:25px;
+}
+
+*.smallRightSpace{
+    padding-left:8%;
+}
+
+*.imgLink{
+    cursor:pointer;
+}
+
+*.noLeftSpace{
+    padding-left:0px;
+}
+
+@media screen and (max-width: 800px) {
+    footer.normalSizeFooter{
+        display:none;    
+    }
+    
+    div.fundingText{
+        font-size:2vw;    
+    }
+
+    div.invisibleOnMobile{
+        display:none;
+    }
+
+    div.textStyle{
+        font-size:2vw;
+    }
+
+    footer.textStyle{
+        font-size:3vw;
+    }
+
+    div.textInTheCenter{
+        text-align: center;
+    }
+
+    footer.mobileSizeFooter{
+        display:block;
+    }
+
+    div.noWrap{
+        white-space: nowrap;
+    }
+
+    div.euLogo{
+        margin-left:4%;
+        padding-bottom:1%;
+    }
+
+    div.athenaLogo{
+        text-align: center;
+    }
+
+    div.desiraLogo{
+        text-align: center;
+    }
+
+
+    img.eu{
+        width: min(75vw, 45px);
+        height: min(50vw, 25px);      
+    }
+
+    img.athenaLogo{
+        width: min(75vw, 105px);
+        height: min(50vw, 25px);      
+    }
+
+    img.desiraLogo{
+        width: min(75vw, 105px);
+        height: min(50vw, 25px);      
+    }
+
+}

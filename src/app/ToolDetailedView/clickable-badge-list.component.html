@@ -1,0 +1,13 @@
+<div>
+<span  class="attributeName">{{capitalizeFirstLetter ( data.attributeName ) }}</span>
+
+<div class="col-0">
+
+    <span class="badge mr-2 clickable toolBubble" *ngFor="let value of data.values" (click)="performQuery(value)"
+    placement="top" ngbTooltip="Search for '{{value.name}}' under {{data.attributeName}}"
+    [ngStyle]="{'background-color':value.color}"
+    >
+      {{capitalizeFirstLetter ( value.name ) }}
+    </span>
+  </div>
+</div>

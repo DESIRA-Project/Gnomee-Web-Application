@@ -1,0 +1,225 @@
+.card-body {
+  padding: calc(1.25rem / 2) !important;
+  padding-bottom: 2px !important;
+}
+
+
+.green {
+  color: #089C89;
+}
+
+.attributeName{
+    /*color:rgb(102,102,102);*/
+    /*font-family:'Oswald';*/
+    font-size:1rem;
+    font-weight: 500;
+}
+
+.attributeValue{
+    font-family:'Roboto';
+    /*color:rgb(102,102,102);*/
+    color: hsl(0, 0%, 40%);
+    /*font-weight: 300;*/
+    font-size:1rem;
+    margin-bottom: calc(1.25rem / 2);
+}
+
+.toolName{
+    /*font-family:'Oswald';*/
+    font-size:2rem;
+    color: #089C89;
+    font-weight: 500;
+}
+
+.mapSettings{
+    height: 100%;
+  /*  width:350px;*/
+}
+
+.toolBubbleColor{
+    color: white;
+    background-color: #a6a6a6;
+}
+
+.toolBubble{
+    font-size:1rem;
+}
+
+.first {
+    order: 1;
+}
+.second {
+    order: 2;
+}
+.third {
+    order: 3;
+}
+
+.clickable{
+    cursor:pointer;
+}
+
+.clickable:hover {
+  filter: brightness(90%);
+}
+
+div.pageTitleWithBack{
+    padding-top:2%;
+    font-size: 1rem;
+    /*padding-left: 50px;*/
+    text-align: center;
+}
+
+.goBackButton{
+    font-size:1rem;
+    color:#089C89;
+    /*padding-top:10px;*/
+    cursor:pointer;
+}
+
+.gapBetweenHeaderAndMainContent{
+    padding-top: 20px;
+    margin-bottom: 20px;
+}
+
+.clickable-badge-list-wrapper {
+  margin-bottom: calc(1.25rem / 2);
+}
+
+.badge {
+  padding: 0.3rem 0.4rem;
+  font-weight: 400;
+  font-size: 0.8rem;
+  margin-bottom: calc(1.25rem / 2);
+  color: white;
+  opacity: 0.8;
+}
+
+@media screen and (max-width: 800px) {
+    .goBackButton{
+        /*font-size:4vw;*/
+        color:#089C89;
+        /*padding-top:10px;*/
+        cursor:pointer;
+    }
+
+    .gapBetweenHeaderAndMainContent{
+        /*padding-top:10%;*/
+    }
+
+    .toolName{
+        /*font-family:'Oswald';*/
+        /*font-size:2vw;*/
+    }
+
+    .attributeName{
+/*        color:rgb(102,102,102);
+        font-family:'Oswald';*/
+        /*font-size:4vw;*/
+    }
+
+    .attributeValue{
+     /*   font-family:'Roboto';*/
+     /*   font-size:3vw;*/
+    }
+
+    .toolBubble{
+        /*font-size:2vw;*/
+    }
+
+
+    .mapSettings{
+      height: 100%;
+        /*height: 210px;*/
+/*        width:100%;*/
+    }
+
+    .first {
+        order: 2;
+    }
+    .second {
+        order: 1;
+    }
+    .third {
+        order: 3;
+    }
+
+    .gapBetweenRows{
+      padding-bottom:20px;
+    }
+
+    div.pageTitle{
+        /*font-size:5vw;*/
+        padding-left:20px;
+    }
+
+    .kbtHeader{
+        display:unset;
+    }
+
+}
+
+.horizontal-line {
+  border-bottom: 1px solid #212529;
+}
+
+.countries-used-in {
+  color: #089C89;
+  background-color: white;
+  position: absolute;
+  top: 9px;
+  right: 9px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  z-index: 1000;
+  border-bottom-left-radius: 5px;
+}
+
+.misc-tech-related-attributes {
+  font-weight: 500;
+  font-size: 0.85rem;
+  color: #089C89;
+  text-transform: uppercase;
+}
+
+.open-in-new-icon {
+  position: relative;
+  bottom: -1px;
+  color: #089C89 !important;
+}
+
+
+.country-map {
+  width: 500px;
+  min-height: 250px;
+}
+
+@media screen and (max-width: 576px) {
+  .app-scenarios, .human-related-attributes {
+    width: unset;
+  }
+
+  .country-map {
+    width: 100%;
+  }
+}
+
+.keywords {
+  position: relative;
+  left: 0.5rem;
+}
+
+.show-additional-info {
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.additional-info {
+  transition: visibility 1s linear;
+}
+
+.added-at {
+  font-size: 0.875rem;
+}

@@ -1,0 +1,34 @@
+<div class="d-flex flex-column text-center">
+
+  <!-- Name -->
+  <div class="toolName mb-1 text-center">
+    <span class="mr-2">{{ name }}</span>
+    <span class="open-in-new-icon clickable"
+          (click)="openBrowserTab(url)"
+          [ngbTooltip]="url" placement="right">
+      <mat-icon>open_in_new</mat-icon>
+    </span>
+  </div>
+
+  <!-- Description -->
+  <span class="mb-1">{{ description }}</span>
+
+  <!-- Horizontal line -->
+  <div class="mb-1 horizontal-line"></div>
+
+  <!-- Outcome -->
+  <div class="mb-1"><span style="font-weight: 500">Achieved Outcome: </span>{{ outcome }}</div>
+
+  <!-- Link -->
+  <span class="mb-1">
+    <a (click)="openBrowserTab(url)"
+       class="clickable"
+       style="color:#089C89;"
+       [ngbTooltip]="url" placement="right">
+      Visit the tool's web page
+    </a>
+  </span>
+
+  <div class="mb-2"></div>
+
+</div>

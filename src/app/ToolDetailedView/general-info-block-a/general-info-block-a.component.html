@@ -1,0 +1,23 @@
+<div class="card mb-0 border-white h-100">
+  <div class="card-body">
+
+    <!-- Domains -->
+    <application-scenario-holder [onlyShowTaxonomyLevel]="0" [pageData]="pageData" [parent]="_parent"></application-scenario-holder>
+
+    <!-- Subdomains -->
+    <application-scenario-holder [onlyShowTaxonomyLevel]="1" [pageData]="pageData" [parent]="_parent"></application-scenario-holder>
+
+    <!-- Requires intenret to operate -->
+    <div class="attributeName">{{ requiresInternetToOperate.data.data ? 'Requires ' : 'Does not require' }} internet to operate</div>
+    <div class="attributeValue">
+      <mat-icon class="green">{{ requiresInternetToOperate.data.data ? 'wifi' : 'wifi_off' }}</mat-icon>
+    </div>
+
+    <!-- Collects data from users -->
+    <div class="attributeName">{{ collectsDataFromUsers.data.data ? 'Collects ' : 'Does not collect' }} data from users</div>
+    <div class="attributeValue">
+      <mat-icon class="green">{{ collectsDataFromUsers.data.data ? 'privacy_tip' : 'verified_user' }}</mat-icon>
+    </div>
+
+  </div>
+</div>

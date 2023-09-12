@@ -1,0 +1,35 @@
+<div>
+    <div class="c-wrapper ">
+
+        <header class="c-header border-1 kbtHeader sticky-top" *ngIf="pageData !== null" style="display:unset;">
+            <div>
+                <kbt-navbar [currentPage]="'Dashboard'"></kbt-navbar>
+            </div>
+        </header>
+
+
+        <div class="c-body mainContent" style="background-color: '#d1d1d124';">
+
+            <main>
+
+                <kbt-breadcrumb [currentPage]="'dashboard'"></kbt-breadcrumb>
+
+<!--                <div class="container-fluid p-5">
+                    <div class="card p-2">
+                        <div class="card-body">  -->
+<!--                            <h4 class="contentTitle"> Dashboard </h4><br>-->
+                            <visuals-table [chartConfiguration]="pageData" [parentRef]="this"></visuals-table>                                                     
+    <!--                    </div>
+                    </div>
+                </div> -->
+            </main>
+        </div>
+    </div>
+</div>
+
+<span *ngIf="modalIsOpen && item !== null">
+    <dynamic-modal [openFromExternalMediumOption]="true" [cb]="onModalClose()" [modalData]="item"></dynamic-modal>
+</span>
+
+<cookie-banner></cookie-banner>    
+<kbt-footer></kbt-footer>

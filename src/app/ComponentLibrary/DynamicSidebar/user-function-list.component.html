@@ -1,0 +1,40 @@
+<!--<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#userMenu" aria-controls="userMenu" aria-expanded="false" aria-label="Toggle navigation">
+  <span class="navbar-toggler-icon"></span>
+</button> -->
+
+<!--  
+
+https://getbootstrap.com/docs/5.0/examples/sidebars/
+
+-->
+
+  <div class="d-flex flex-column flex-shrink-0 p-0 text-white bg-dark h-100 gnomee-user-sidenav">
+
+      <hr>
+
+      <ul class="nav nav-pills flex-column mb-auto h-100" id="userMenu" *ngIf="view !== null" style="font-size:0.7vw;">                                  
+
+        <li class="nav-item" *ngFor="let f of view ;let i = index">
+            
+          <a *ngIf="i - 1>0 && view[i - 1].scope !== view[i].scope && itemCanBeViewed(view[i])" target="_blank"  class="nav-link gnomee-sidenavlink hideInMobile" style="color:green;" >
+            {{view[i].scope}}
+          </a>           
+
+          <a target="_blank"  class="nav-link gnomee-sidenavlink" aria-current="page" (click)="setActiveItem(i)"  style="cursor:pointer;"
+            [ngClass]="{'active gnomee-user-sidenav': activeItem === i}" *ngIf="itemCanBeViewed(f)" >
+            <div class="container"> 
+            <div class="row">
+              <i class="fas col-0 {{f.icon ? f.icon : ''}} imgSize" style="margin-top:5px;"></i>
+              <span class="col-10 hideInMobile">
+                {{f.desc}}
+              </span>
+            </div>
+          </div>
+            </a>    
+        </li>
+        
+        </ul>
+        
+      <hr>
+      
+    </div>

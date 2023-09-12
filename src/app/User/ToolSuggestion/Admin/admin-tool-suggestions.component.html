@@ -1,0 +1,93 @@
+<div class="card p-2 shadow-lg" *ngIf="userCanViewAllSuggestedTools(); else unadequatePermissionsBlock">
+    <div class="card-header" *ngIf="title !== null">{{title}}</div>
+
+    <div class="card-body">
+        <div class="container">
+
+            <div class="row" *ngIf="alert !== null">
+                <div class="col">
+                    <div  class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{alert.msg}}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row  justify-content-center">
+            <div class="col-sm-12 col-md-10 responsiveTable" *ngIf="ready;else notReadyBlock">
+              <div *ngIf="tools.length > 0;else noResultsBlock">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                      <th scope="col" class="tableColumnEnum tableColName">#</th>
+                      <th scope="col" class="tableColumn tableColName">Name</th>
+                      <th scope="col" class="tableColumn tableColName">User</th>                      
+                      <th scope="col" class="tableColumn tableColName">Status</th>
+                      <th scope="col" class="tableColumn tableColName">Created</th>
+                      <th scope="col" class="tableColumn tableColName">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let tool of tools; index as i">
+                      <th scope="row" class="tableColumnEnum tableColValue">{{ i + 1 }}</th>
+                      <td class="tableColumn tableColValue"><span ngbTooltip="{{tool.name}}">{{ tool.name ? getLimitedString ( tool.name , 20) : '' }} </span></td>
+                      <td class="tableColumn tableColValue"><span ngbTooltip="{{tool.userName}}">{{ tool.userName ? getLimitedString ( tool.userName, 7 ) : '' }}</span></td>
+                      <td class="tableColumn tableColValue"><span [ngClass]="{'statusAccepted' : tool.status === 'commited', 'statusPending':tool.status === 'pending','statusRejected':tool.status === 'rejected','statusDeleted':tool.status === 'deleted'}">{{ tool.status }}</span></td>
+
+                      <td class="tableColumn tableColValue">{{ tool.created |  date: 'yyyy-MM-dd h:m:s'}}</td>  
+
+                      <td>
+                        <div class="btn-group">
+                          <i *ngIf="tool.url.trim().length !== 0" class="fa fa-paper-plane visitURLIcon "  ngbTooltip="Visit external Digital Tool page" (click)="rc.openBrowserTab(tool.url)"></i>                                 
+                          <i class="fa fa-eye viewIcon ml-2" ngbTooltip="View Tool" (click)="viewSuggestedTool(i)"></i>
+                          <i *ngIf="tool.status === 'pending'" class="fa fa-pen ml-2 editIcon" ngbTooltip="Edit Tool" (click)="editSuggestedTool(i)"></i>
+                          <i *ngIf="tool.status === 'pending'" class="fa fa-check ml-2 acceptIcon" ngbTooltip="Accept Tool" (click)="commit(i)"></i>
+                          <i *ngIf="tool.status === 'pending'" class="fa fa-times ml-2 rejectIcon" ngbTooltip="Reject Tool" (click)="deleteSuggestedTool(i)"></i>
+                        </div>
+                      </td>
+                    </tr>
+                    </tbody>
+                  </table>
+                  </div>
+                  <ng-template #noResultsBlock>
+                    <span>No Digital Tool Suggestions yet.</span>
+                  </ng-template>
+                     
+            </div>
+            <ng-template #notReadyBlock>
+<!--              <div *ngIf="!ready">ss
+                  <div class="spinner-border" role="status" style="margin-left:45%;margin-top:20%;">
+                  </div>
+              </div>-->
+           
+                <div class="col-6" *ngIf="!ready">
+                     <div >
+                         <div class="spinner-border" role="status" style="margin-left:45%;margin-top:20%;">
+                         </div>
+                     </div>
+              
+          </div>
+            </ng-template>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<span *ngIf="modalIsOpen">
+  <dynamic-modal [openFromExternalMediumOption]="true" [cb]="onModalClose()" [modalData]="getDynamicContent()" [modalTitle]="getModalTitle()" [closeButtonTextAttribute]="'Cancel'" [modalParent]="this"></dynamic-modal>
+</span>
+
+<span *ngIf="editSuggestedToolModalIsOpen">
+  <dynamic-modal [openFromExternalMediumOption]="true" [cb]="onEditModalClose()" [modalData]="getEditSuggestedToolContent()" [closeButtonTextAttribute]="'Cancel'" [modalTitle]="getEditSuggestedToolModalTitle()" [modalParent]="this" [modalSize]='"lg"' [modalFullHeight]="true"></dynamic-modal>
+</span>
+
+<ng-template #unadequatePermissionsBlock>
+  <div class="card-header" *ngIf="title !== null">{{title}}</div>
+  <div class="card-body">
+        User does not have adequate permissions to view this page
+  </div>            
+</ng-template>

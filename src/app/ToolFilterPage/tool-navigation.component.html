@@ -1,0 +1,88 @@
+<div class="kbtNavigationDesktop" *ngIf="dataFetched">
+    <div class="container">
+        <div class="row justify-content-between">
+            <div class="col-sm-4">
+                Page {{data.currentPageNumber + 1}} of {{  data.totalAmountOfPages !== 0 ? data.totalAmountOfPages   : 1 }}
+            </div>
+
+            <div class="col-3-auto">
+                <ul class="pagination pagination-sm">
+                    <li class="pagination-first page-item" [ngClass]="{'disabled' : data.currentPageNumber == 0 }">
+                        <a target="_blank" class="page-link" (click)="fetchFirstPage()">«</a>
+                    </li>
+                    <li class="pagination-prev page-item"  [ngClass]="{'disabled' : data.currentPageNumber == 0 }" >
+                        <a target="_blank" (click)="fetchPreviousResultPage()" class="page-link">‹</a>
+                    </li>
+
+                    <li class="pagination-page page-item " [ngClass]="{'active' : pg == data.currentPageNumber + 1}"                        
+                        *ngFor="let pg of pageEnumeration;let i = index">
+                        <a  target="_blank" class="page-link" (click)="fetchPage(pg - 1)" >{{pg}}</a>
+                    </li>
+
+                    <li class="pagination-next page-item" [ngClass]="{'disabled' : data.currentPageNumber + 1 >= data.totalAmountOfPages }">
+                        <a target="_blank" (click)="fetchNextResultPage()" class="page-link">›</a>
+                    </li>
+                    <li class="pagination-last page-item" [ngClass]="{'disabled' : data.currentPageNumber + 1 >= data.totalAmountOfPages }">
+                        <a target="_blank" class="page-link" (click)="fetchLastPage()">»</a>
+                    </li></ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="kbtNavigationMobile" *ngIf="dataFetched">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-auto pageInfo">
+                Page {{data.currentPageNumber + 1}} of {{  data.totalAmountOfPages !== 0 ? data.totalAmountOfPages   : 1 }}
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+             <div class="col-0">
+                <ul class="pagination pagination-sm ">
+                    <li class="pagination-first page-item" [ngClass]="{'disabled' : data.currentPageNumber == 0 }">
+                        <a target="_blank" class="page-link" (click)="fetchFirstPage()">«</a>
+                    </li>
+                    <li class="pagination-prev page-item"  [ngClass]="{'disabled' : data.currentPageNumber == 0 }" >
+                        <a target="_blank" (click)="fetchPreviousResultPage()" class="page-link">‹</a>
+                    </li>
+
+                    <li class="pagination-page page-item " [ngClass]="{'active' : pg == data.currentPageNumber + 1}"                        
+                        *ngFor="let pg of pageEnumeration;let i = index">
+                        <a  target="_blank" class="page-link" (click)="fetchPage(pg - 1)" >{{pg}}</a>
+                    </li>
+
+                    <li class="pagination-next page-item" [ngClass]="{'disabled' : data.currentPageNumber  + 1 >= data.totalAmountOfPages }">
+                        <a target="_blank" (click)="fetchNextResultPage()" class="page-link">›</a>
+                    </li>
+                    <li class="pagination-last page-item" [ngClass]="{'disabled' : data.currentPageNumber + 1 >= data.totalAmountOfPages }">
+                        <a target="_blank" class="page-link" (click)="fetchLastPage()">»</a>
+                    </li></ul>
+             </div>
+        </div>
+
+<!--
+            <div class="col-3-auto">
+                <ul class="pagination pagination-sm">
+                    <li class="pagination-first page-item" [ngClass]="{'disabled' : data.currentPageNumber == 0 }">
+                        <a target="_blank" class="page-link" (click)="fetchFirstPage()">«</a>
+                    </li>
+                    <li class="pagination-prev page-item"  [ngClass]="{'disabled' : data.currentPageNumber == 0 }" >
+                        <a target="_blank" (click)="fetchPreviousResultPage()" class="page-link">‹</a>
+                    </li>
+
+                    <li class="pagination-page page-item " [ngClass]="{'active' : pg == data.currentPageNumber + 1}"                        
+                        *ngFor="let pg of pageEnumeration;let i = index">
+                        <a  target="_blank" class="page-link" (click)="fetchPage(pg - 1)" >{{pg}}</a>
+                    </li>
+
+                    <li class="pagination-next page-item" [ngClass]="{'disabled' : data.currentPageNumber  >= data.totalAmountOfPages }">
+                        <a target="_blank" (click)="fetchNextResultPage()" class="page-link">›</a>
+                    </li>
+                    <li class="pagination-last page-item" [ngClass]="{'disabled' : data.currentPageNumber >= data.totalAmountOfPages }">
+                        <a target="_blank" class="page-link" (click)="fetchLastPage()">»</a>
+                    </li></ul>
+            </div>-->
+    </div>
+</div>

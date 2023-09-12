@@ -1,0 +1,22 @@
+<div class="container">
+
+  <div class="row">
+    <div class="col">
+      <p class="font-weight-bold text-center">{{this.title}}</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <p class="font-weight-light text-center">{{this.description}}</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <div class="container" #chart *ngIf="chartReady">
+        <figure id="{{this.chartId}}"></figure>
+      </div>
+    </div>
+  </div>
+
+</div>

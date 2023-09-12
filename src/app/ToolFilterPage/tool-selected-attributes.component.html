@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="row" style="padding-bottom:1%;" *ngIf="expressions !== null">
+    <div class="col-0">
+      <span *ngFor="let expr of expressions.exprs; let i = index">
+      <span class="badge  mr-1" style="background-color: #f1cc158c;">
+        {{expr.field.name}} : {{expr.value}}
+        <i class="cil-x-circle" (click)="removeSearchQuery(i)"></i>
+      </span>
+    </span>
+    </div>
+  </div>
+  <div class="row" *ngIf="selectedAttributes.length > 0">
+    <div class="col-0">
+
+      <span class="badge  mr-1" *ngFor="let selectedAttribute of selectedAttributes" style="background-color:#e1a4b8ad;">
+        {{selectedAttribute.attributeName}} : {{selectedAttribute.value}}
+        <i class="cil-x-circle" (click)="remove(selectedAttribute)"></i>
+      </span>
+    </div>
+  </div>
+
+</div>

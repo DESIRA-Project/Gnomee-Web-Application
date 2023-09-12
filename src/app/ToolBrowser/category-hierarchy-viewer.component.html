@@ -1,0 +1,8 @@
+<div *ngIf="_hierarchy !== null && _leaf !== null" class="gapBetween">
+    <div *ngFor="let h of _hierarchy">
+        {{h[0]}}:{{h[1]}}
+    </div>
+    <div *ngFor="let h of _leaf">
+        <span>{{h[0]}}:<span class="" [ngStyle]="{'color': titleColor === null ? '' : titleColor}">{{h[1]}}</span></span>
+    </div>
+ </div>

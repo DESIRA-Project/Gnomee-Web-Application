@@ -1,0 +1,135 @@
+<div  class="card p-2 shadow-lg" *ngIf="userCanViewStoredDigitalTools(); else unadequatePermissionsBlock">
+    <div class="card-header" *ngIf="title !== null">{{title}}</div>
+
+    <div class="card-body" (keydown.enter)="searchTerm();">
+        <div class="container">
+
+          <div class="row" *ngIf="alert !== null">
+            <div class="col">
+                <div  class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{alert.msg}}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+
+
+            <div class="row justify-content-center" >
+                 <div class="col-md-10 col-sm-8 p-3">
+                 
+                
+
+                    <div class="container">
+                      <div class="row col-sm-10">
+                        <label for="inputSearchTerm" class="termSearchLabel">Filter Digital Tools</label>
+                      </div>
+                      <div class="row justify-content-center">
+                        <div class="col-sm-8">
+                        <input  type="text" class="form-control termSearchFont" id="inputSearchTerm" aria-describedby="inputSearchTermHelp" placeholder="Enter term" (input)="onInputChange($event)">
+                      </div>
+                        <div class="col-sm-4 buttonGroupMarginTopMobile">
+                        <button type="button" class="btn btn-primary termSearchFont" style="   
+                        background-color: #089C89 !important;
+                        border-color:#089C89;
+                        background-image: linear-gradient(to right, #089C89 , #07C19A)   !important;"
+                        [disabled]="searchTermValue.trim().length === 0" (click)="searchTerm()"
+                        >
+                        Search</button>
+
+                        <button type="button" class="btn btn-secondary ml-2 termSearchFont" 
+                        [disabled]="searchTermValue.trim().length === 0" (click)="clearTerm()"
+                        >
+                        Clear</button>
+                      </div>
+                      </div>
+
+                      </div>
+
+                    </div>
+
+                  </div>
+
+
+                <div class="row justify-content-center"  *ngIf="ready;else notReadyBlock">
+                <div class="col-sm-12 col-md-10 responsiveTable" *ngIf="tools.length != 0; else emptyResultsBlock">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                          <th scope="col" class="tableColumnEnum tableColName" >#</th>
+                          <th scope="col" class="tableColumn tableColName">Name</th>
+<!--                          <th scope="col" class="tableColumn tableColName">URL</th> -->
+                          <th scope="col" class="tableColumn tableColName">Description</th>
+                          <th scope="col" class="tableColumn tableColName">Created</th>
+                          <th class="tableColumn tableColName" scope="col" *ngIf="userCanEditStoredDigitalTools()">Actions</th>
+    
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let tool of tools; index as i">
+                            <th class="tableColumnEnum tableColValue" scope="row">{{ i + 1 }}</th>
+                            <td class="tableColumn tableColValue"><span ngbTooltip="{{tool.name}}">{{ tool.name ? getLimitedString ( tool.name , 20) : '' }} </span></td>
+    <!--                        <td class="tableColumn tableColValue">
+                              <span ngbTooltip="{{tool.url}}" (click)="rc.openBrowserTab(tool.url)">
+                             <a href="javascript:void(0);"> {{ tool.url ? 'Visit URL' : '' }}</a>
+                            </span></td>-->
+                            <td class="tableColumn tableColValue"><span ngbTooltip="{{tool.description}}">{{ tool.description !== null ? ( tool.description.length > 10 ? getLimitedString (tool.description, 10) : tool.description) : ""}}</span></td>
+                            <td class="tableColumn tableColValue">{{ tool.dateAdded |  date: 'yyyy-MM-dd h:m:s'}}</td>  
+                         <td *ngIf="userCanEditStoredDigitalTools()">
+                                <div class="btn-group">
+                                  <i *ngIf="tool.url.trim().length !== 0" class="fa fa-paper-plane visitURLIcon "  ngbTooltip="Visit external Digital Tool page" (click)="rc.openBrowserTab(tool.url)"></i>
+                                  <i *ngIf="userCanViewStoredDigitalTools()" class="fa fa-eye viewIcon ml-2"  ngbTooltip="View Digital Tool" (click)="viewTool(i)"></i>
+                                  <i *ngIf="userCanEditStoredDigitalTools()"   class="fa fa-pen ml-2 editIcon" ngbTooltip="Edit Digital Tool" (click)="editSuggestedTool(i)"></i>
+                                  <i *ngIf="userCanDeleteStoredDigitalTools()" class="fa fa-times ml-2 rejectIcon" ngbTooltip="Delete Digital Tool" (click)="deleteSuggestedTool(i)"></i>
+
+
+                                  </div>
+    
+                          </td>
+                                                  
+                        </tr>
+                        </tbody>
+                      </table>
+    
+                </div>
+                <ng-template #emptyResultsBlock>
+                  <span>There are no stored Digital Tools.</span>
+                  </ng-template>
+      
+    
+                </div>
+    
+                <ng-template #notReadyBlock>
+                  <div class="row  justify-content-center" *ngIf="!ready">
+                  <div  class="col-6">
+                      <div class="spinner-border" role="status" style="margin-left:45%;margin-top:20%;">
+                      </div>
+                  </div>
+                </div>
+                </ng-template>
+        </div>
+    </div>
+</div>
+
+<div class="" style="padding-top:2%"
+*ngIf="ready && navigationData !== null">
+<navigation [parent]="this" [setData]="navigationData"></navigation>
+</div>
+
+
+<ng-template #unadequatePermissionsBlock>
+    <div class="card-header" *ngIf="title !== null">{{title}}</div>
+    <div class="card-body">
+          User does not have adequate permissions to view this page
+    </div>            
+  </ng-template>
+
+  <span *ngIf="modalIsOpen">
+    <dynamic-modal [openFromExternalMediumOption]="true" [cb]="onModalClose()" [modalData]="getDynamicContent()" [modalTitle]="getModalTitle()" [closeButtonTextAttribute]="'Cancel'" [modalParent]="this"></dynamic-modal>
+  </span>
+
+  <span *ngIf="editDigitalToolModalIsOpen">
+    <dynamic-modal [openFromExternalMediumOption]="true" [cb]="onEditModalClose()" [modalData]="getEditSuggestedToolContent()" [modalTitle]="getEditSuggestedToolModalTitle()" [closeButtonTextAttribute]="'Cancel'" [modalParent]="this" [modalSize]='"lg"' [modalFullHeight]="true"></dynamic-modal>
+  </span>

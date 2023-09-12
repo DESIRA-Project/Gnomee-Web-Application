@@ -1,0 +1,30 @@
+<div class="card text-white text-center card-style" *ngIf="isVisible() && isLoaded()"
+    (click)="accessCurrentNode()"
+    [ngClass]="{'non-terminal': !isTerminalNode }"
+    [ngStyle]="{'background-color': dataLoaded ? bgColor : ''}">
+    <div class="card-body card-body-style">
+
+<!--        <h4 class="card-text-style"
+              [ngClass]="{'card-text-alignment': hasSmallStringValue && !isTerminalNode }"
+              [ngStyle]="{'color' : dataLoaded ? titleColor : ''}"
+            >{{value}}</h4> -->
+
+            <h4 class="card-text-style dots-after-3-lines mb-1" *ngIf="isTerminalNode; else NonTerminalNodeBlock"
+            [ngClass]="{'card-text-alignment': hasSmallStringValue && !isTerminalNode }"
+            [ngStyle]="{'color' : dataLoaded ? titleColor : ''}"
+            placement="top" ngbTooltip="{{fullTitle}}"
+          >{{value}}</h4>
+<!--  [ngClass]="{'small-card-text-style': value && value.length > 30 }" -->
+          <ng-template #NonTerminalNodeBlock>
+            <h4 class="small-card-text-style dots-after-2-lines mb-1"
+            [ngClass]="{'card-text-alignment': true }"
+
+            [ngStyle]="{'color' : dataLoaded ? titleColor : ''}"
+          >{{value}}</h4>
+          </ng-template>
+
+
+       <span *ngIf="isTerminalNode" class="card-text dots-after-2-lines"    placement="left" ngbTooltip="{{fullDescription}}"
+       [ngStyle]="{'color' : dataLoaded ? descriptionColor : ''}">{{description}}</span>
+    </div>
+</div>

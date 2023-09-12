@@ -1,0 +1,27 @@
+<ng-template class="modal fade" #content let-modal id="filterModal" #filterModal tabindex="-1" role="dialog" aria-labelledby="filterModalTitle" aria-hidden="true"
+>
+    <div class="" role="document"
+    >
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="filterModalTitle">Filters</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="_parent.toggleFilterModal()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div class="" *ngIf="_parent.dataReady == true && _parent.paginationReady == true; else spinnerBlock">
+                <tool-filter-holder [parent]="_parent" [closed]="true"></tool-filter-holder>
+            </div>
+            <ng-template #spinnerBlock>
+                <div class="spinner-border" role="status" style="margin-left:45%;margin-top:20%;">
+                </div>
+            </ng-template>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="_parent.toggleFilterModal()">Close</button>
+<!--              <button type="button" class="btn btn-primary">Save changes</button> -->
+        </div>
+      </div>
+    </div>
+</ng-template>

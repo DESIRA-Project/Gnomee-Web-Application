@@ -1,0 +1,50 @@
+<div>
+    <div class="c-wrapper ">
+
+        <header class="c-header border-1 kbtHeader sticky-top" *ngIf="pageData !== null" style="display:unset;">
+            <div>
+                <kbt-navbar [currentPage]="'Browse'"></kbt-navbar>
+            </div>
+        </header>
+
+
+        <div class="c-body" style="background-color: '#d1d1d124';">
+
+            <main>
+
+                <kbt-breadcrumb [currentPage]="'browse'"></kbt-breadcrumb>
+
+                <div class="container-fluid p-5">
+                    <div class="card p-2 shadow-lg">
+                        <div class="card-body">                            
+                    <div *ngIf="dataReady && iterator !== null;else spinnerBlock">
+                        <path-viewer [pathIterator]="iterator" [traversed]="isOnPath" ></path-viewer>
+                    </div>
+
+                    <ng-template #spinnerBlock>
+                        <div class="card-body">
+                            <div class="container">
+                                <div class="row justify-content-center">
+                                    <div class="col-0">
+                                        <div class="spinner-border" role="status">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template>
+
+                    </div>
+                    </div>
+                </div>
+
+            </main>
+
+        </div>
+
+    </div>
+</div>
+
+
+<cookie-banner></cookie-banner>    
+<kbt-footer></kbt-footer>

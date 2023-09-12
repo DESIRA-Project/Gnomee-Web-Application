@@ -1,0 +1,110 @@
+<div >
+  
+
+    <div >
+        <div class="container">
+            <div class="row" *ngIf="alert !== null">
+                <div class="col">
+                    <div  class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{alert.msg}}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" *ngIf="errorAlert !== null">
+                <div class="col">
+                    <div  class="alert alert-danger alert-dismissible fade show" role="alert">
+                        {{errorAlert.msg}}
+                        <button type="button" class="close" data-dismiss="errorAlert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row  justify-content-center">
+                <div class="col-6">
+
+
+                    <div *ngIf="!formReady">
+                        <div class="spinner-border" role="status" style="margin-left:45%;margin-top:20%;">
+                        </div>
+                    </div>
+
+                    
+
+                    <form *ngIf="formReady && data" >
+                        <div class="">
+                            
+                            <div *ngFor="let datum of data">
+                                <div *ngIf="datum.data.type === 'list'; else elseBlock">
+                                    <options-list [parent]="this" [data]="datum.data" [name]="datum.data.repr"
+                                        [toggleable]="false" [description]="datum.data.description" [setReadonly]="isReadonly" [showAmounts]="false"></options-list>
+                                </div>
+                                <ng-template #elseBlock>
+                                    <form *ngIf="datum.data.type === 'tree'; else remainingDataTypesBlock">
+                                        <div *ngIf="taxonomyNotPresent && resultsSubmitted" id="taxonomyMissing">
+                                            <div style="width: 100%;
+                                            margin-top: 0.25rem;
+                                            font-size: 80%;
+                                            color: #dc3545;">
+                                            Taxonomy is required*
+                                            </div>
+                                         </div>            
+            
+                                        <options-tree [parent]="this" [setData]="datum.data" [name]="datum.data.repr"
+                                            [description]="datum.data.description" [setReadonly]="isReadonly" [showAmounts]="false"></options-tree>
+                                        </form>
+                                    <ng-template #remainingDataTypesBlock>
+                                        <div *ngIf="datum.data.type === 'ranged-value'; else interactivekeywordsBlock">
+                                            <selectable-drop-down [data]="datum" [parent]="this" [setReadonly]="isReadonly"></selectable-drop-down>
+                                        </div>
+                                        <ng-template #interactivekeywordsBlock>
+                                            <div *ngIf="datum.data.type === 'interactive-keyword-values'; else plainValueBlock">
+                                                <interactive-keyword-container [data]="datum" [parent]="this" [setReadonly]="isReadonly"></interactive-keyword-container>
+                                             </div>
+                                        </ng-template>
+                                    <ng-template #plainValueBlock> 
+
+                                        <div *ngIf="datum.data.type.indexOf('value') !== -1">
+                                            <editable-single-value-attribute [setData]="datum" [setParent]="this" [setReadonly]="isReadonly"> 
+                                            </editable-single-value-attribute>
+                                        </div>
+
+                                        </ng-template>
+                                    </ng-template>
+                                </ng-template>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="row justify-content-center" *ngIf="showRecaptcha">
+                <div  id="rc"  class="form-group col-10 col-md-6"></div>
+            </div>
+        </div>
+    </div>
+
+<!--    <div class="card-footer">
+        <div class="container btn-toolbar" *ngIf="!isReadonly" >
+                 <a class="btn btn-primary mb-2 mr-2" (click)="submit()">{{submitButtonText}}</a>
+                 <a class="btn btn-primary mb-2 mr-2" (click)="commit()">Accept</a>
+        </div>
+    </div>-->
+    <div >
+        <div class="btn-toolbar justify-content-end">
+        <div class="btn-group" *ngIf="!isReadonly && renderInCard">
+            <button type="button"  [disabled]="!onChange() ? 'disabled' : null"   (click)="submit()"  class="btn gnomee-button-in-toolbar-gap  btn-primary gnomee-button" [style.cursor]="!onChange() ? 'not-allowed' : 'pointer' " >{{submitButtonText}}</button>
+   <!--         <button type="button"  [disabled]="!onChange() ? 'disabled' : null"  (click)="commit()" class="btn btn-primary gnomee-button" [style.cursor]="!onChange() ? 'not-allowed' : 'pointer' ">Accept</button> -->
+        </div>
+    </div>
+    </div>
+
+
+    <span *ngIf="dependencies.length !== 0 && checkComponent !== null && checkModalIsOpen">
+        <dynamic-modal [openFromExternalMediumOption]="true" [cb]="onModalClose()" [modalData]="checkComponent" [modalTitle]="''" [closeButtonTextAttribute]="'Cancel'" [modalParent]="this"></dynamic-modal>
+    </span>

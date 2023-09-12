@@ -1,0 +1,26 @@
+img.logoImg{
+/*    width: min(6vw, 60px);
+    height: min(4vw, 40px);
+    */
+    padding-top:5px;
+    width: min(75vw, 120px);
+  /*  height: min(50vw, 100px);*/  
+    cursor: pointer;
+}
+
+@media screen and (max-width: 800px) {    
+    img.logoImg{
+/*        width: 60px;
+        height: 40px;*/
+        padding-top:5px;
+        width: 70px;
+/*        height: 60px;*/
+      /*  height: min(50vw, 100px);*/
+      
+    }
+
+    div.pageTitle{
+        padding-top:1%;
+        font-size: 6vw;
+    }
+}  

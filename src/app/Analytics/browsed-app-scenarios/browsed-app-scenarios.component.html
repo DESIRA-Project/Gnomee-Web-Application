@@ -1,0 +1,44 @@
+<div class="container">
+
+  <div class="row">
+    <div class="col">
+      <p class="font-weight-bold text-center">{{this.title}}</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <p class="font-weight-light text-center">{{this.description}}</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <div class="container" #chart *ngIf="chartReady">
+        <figure  id="{{this.chartId}}"></figure>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col text-center">
+
+      Group by
+
+      <!--Dropdown-->
+      <div class="dropdown d-inline-block mx-4">
+
+        <button class="btn btn-secondary dropdown-toggle filter" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {{this.currentGroup}}
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <button *ngFor="let group of groups" (click)="filter(group)" class="{{(this.currentGroup === group) ? 'dropdown-item active' : 'dropdown-item'}}">
+            {{group}}
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+</div>

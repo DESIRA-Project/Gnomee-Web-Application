@@ -1,0 +1,70 @@
+<div  class="card p-2 shadow-lg" *ngIf="userCanViewAllUsers(); else unadequatePermissionsBlock">
+    <div class="card-header" *ngIf="title !== null">{{title}}</div>
+    <div class="card-body">
+        <div class="container">
+            <div class="row justify-content-center"  *ngIf="ready;else notReadyBlock">
+                <div class="col-sm-12 col-md-10 responsiveTable" *ngIf="users.length != 0; else emptyResultsBlock">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                          <th scope="col" class="tableColumnEnum tableColName" >#</th>
+                          <th class="tableColumn tableColName" scope="col">User</th>
+                          <th class="tableColumn tableColName" scope="col">Email</th>
+                          <th class="tableColumn tableColName" scope="col">Role</th>
+                          <th class="tableColumn tableColName" scope="col" *ngIf="userCanEditAllUsers()">Actions</th>
+    
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let user of users; index as i">
+                          <th class="tableColumnEnum tableColValue" scope="row">{{ i + 1 }}</th>
+                          <td class="tableColumn tableColValue">{{ user.username }}</td>
+                          <td class="tableColumn tableColValue">{{ user.email }}</td>
+                          <td class="tableColumn tableColValue">{{ user.role  }}</td>
+                         <td *ngIf="userCanEditAllUsers()">
+                                <div class="btn-group">
+                                    <i class="fa fa-eye viewIcon" ngbTooltip="View User Profile" (click)="viewUserInfo(i)"></i>
+                                    <i  class="fa fa-pen ml-2 editIcon" ngbTooltip="Edit User Profile" (click)="editUserInfo(i)"></i>
+                                    <i *ngIf="userIsBlocked(i)" class="fa fa-check ml-2 acceptIcon" ngbTooltip="Activate User" (click)="activateUser(i)"></i>
+                                    <i *ngIf="userIsActive(i)"  class="fa fa-times ml-2 rejectIcon" ngbTooltip="Block User" (click)="activateUser(i)"></i>
+                                  </div>
+    
+                          </td>                                                  
+                        </tr>
+                        </tbody>
+                      </table>
+    
+                </div>
+                <ng-template #emptyResultsBlock>
+                  <span>No users yet.</span>
+                  </ng-template>
+      
+    
+                </div>
+    
+                <ng-template #notReadyBlock>
+                  <div class="row  justify-content-center" *ngIf="!ready">
+                  <div  class="col-6">
+                      <div class="spinner-border" role="status" style="margin-left:45%;margin-top:20%;">
+                      </div>
+                  </div>
+                </div>
+                </ng-template>
+        </div>
+    </div>
+</div>
+
+<ng-template #unadequatePermissionsBlock>
+    <div class="card-header" *ngIf="title !== null">{{title}}</div>
+    <div class="card-body">
+          User does not have adequate permissions to view this page
+    </div>
+</ng-template>
+
+<span *ngIf="modalIsOpen">
+    <dynamic-modal [openFromExternalMediumOption]="true" [cb]="onModalClose()" [closeButtonTextAttribute]="'Cancel'" [modalData]="getDynamicContent()" [modalTitle]="getModalTitle()" [modalParent]="this" [modalSize]="'xl'"></dynamic-modal>
+</span>
+
+<span *ngIf="cancellableOperationModalIsOpen">
+  <dynamic-modal [openFromExternalMediumOption]="true" [cb]="onModalClose()" [closeButtonTextAttribute]="'Cancel'" [modalData]="getCancellableContent()" [modalTitle]="''" [modalParent]="this" [modalSize]="'sm'"></dynamic-modal>
+</span>

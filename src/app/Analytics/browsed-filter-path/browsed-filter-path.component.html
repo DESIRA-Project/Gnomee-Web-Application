@@ -1,0 +1,43 @@
+<div class="container">
+
+  <div class="row">
+    <div class="col">
+      <p class="font-weight-bold text-center">{{this.title}}</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <p class="font-weight-light text-center">{{this.description}}</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <div class="container" #chart *ngIf="chartReady">
+        <figure  id="{{this.chartId}}"></figure>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col text-center">
+
+      Select Filter
+
+      <div class="dropdown d-inline-block mx-4">
+
+        <button class="btn btn-secondary dropdown-toggle filter" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {{this.currentIndex}}
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <button *ngFor="let indexName of indexes" (click)="filter(indexName)" class="{{(this.currentIndex === indexName) ? 'dropdown-item active' : 'dropdown-item'}}">
+            {{indexName}}
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+</div>

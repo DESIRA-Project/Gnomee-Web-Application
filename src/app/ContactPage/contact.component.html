@@ -1,0 +1,35 @@
+<div>
+    <div class="c-wrapper">
+
+        <header class="c-header border-1 kbtHeader sticky-top" *ngIf="pageData !== null" style="display:unset;">
+            <div>
+                 <kbt-navbar [currentPage]="'Contact'"></kbt-navbar>
+            </div>
+        </header>
+
+        <div class="c-body textShadow mainContent"  *ngIf="pageData !== null" style="background-color: {{pageData.colors.background}};">
+            <main>
+                <kbt-breadcrumb [currentPage]="'contact'"></kbt-breadcrumb>
+
+                <div class="container h-100 align-middle p-5">
+                <div class="row align-items-center justify-content-center maincontainer">
+
+                    <div class="container">
+                        <div class="card p-4 shadow-lg">
+                            <div class="card-body">
+                                <h4 class="contentTitle"> Contact Us </h4><br>
+                                <div>
+                                    <tool-form [data]="data"></tool-form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </main>
+         </div>
+     </div>
+</div>
+
+<cookie-banner></cookie-banner>
+<kbt-footer></kbt-footer>

@@ -1,0 +1,17 @@
+
+<div class="container">
+    <div class="row" [ngClass]="showAttributeName ? 'justify-content-around' : ''">
+        <div *ngIf="showAttributeName" class="col-md-3 attributeName">
+            {{data.data.repr}}
+        </div>
+<!--ngbTooltip="Search for '{{el.value}}' under {{data.data.repr}}" -->
+        <div class="col" [ngClass]="showAttributeName ? '' : 'pl-0'">
+        <span class="badge  mr-2 clickable toolBubble toolBubbleColor" *ngFor="let el of data.data.data"
+         placement="top" ngbTooltip="{{el && el.tooltip && el.tooltip !== '' ? el.tooltip : 'Search for '+ el.value + ' under '+data.data.repr+'.'}}"
+         (click)="performQuery(el)">
+            {{ capitalizeFirstLetter ( el.value ) }}
+      <!--      <i class="cil-x-circle" (click)="remove(selectedAttribute)"></i> -->
+          </span>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,19 @@
+<div class="card shadow-lg">
+    <div class="card-body">
+          <div class="container" *ngIf="data !== null">
+            <ng-container *ngFor="let datum of data">
+              <div class="row" *ngIf="datum.data.repr" style="padding-bottom:25px;">
+                  <div class="col" *ngIf="datum.data.type === 'list' || datum.data.type === 'comment-list'; else elseValueBlock">
+                    <horizontal-attribute-list [pageData]="pageData" [parent]="this" [data]="datum"></horizontal-attribute-list>
+                  </div>
+
+                  <ng-template #elseValueBlock>
+                    <div class="col" *ngIf="datum.data.type.indexOf('value') !== -1">
+                          <single-value-attribute [data]="datum"></single-value-attribute>
+                      </div>
+                  </ng-template>
+              </div>
+            </ng-container>
+          </div>
+    </div>
+</div>

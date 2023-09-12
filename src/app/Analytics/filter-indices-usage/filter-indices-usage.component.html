@@ -1,0 +1,31 @@
+<div class="container">
+
+  <div class="row">
+    <div class="col">
+      <p class="font-weight-bold text-center">{{title}}</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <p class="font-weight-light text-center">{{description}}</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <figure id="{{this.chartId}}"></figure>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <app-ngbd-datepicker-range-popup [fromDate]="this.fromDate"
+                                       [toDate]="this.toDate"
+                                       (newFilter)="search()"
+                                       (resetEvent)="ngOnInit()">
+      </app-ngbd-datepicker-range-popup>
+    </div>
+  </div>
+
+</div>

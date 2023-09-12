@@ -1,0 +1,14 @@
+
+<div *ngIf="chartConfig !== null && parent !== null" class="container-fluid p-5">
+    <div *ngFor="let rowComponent of chartConfig.rows" class="row  p-2">
+        <div *ngFor="let element of rowComponent" class="container col-sm">
+            <div class="card shadow-lg" style="border-radius: 1%">
+                <div class="card-body row p-2">
+                    <div *ngFor="let e of element" class="col-sm">
+                        <chart [chartConfiguration]="chartConfig.charts[e]" [parentRef]="parent"></chart>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

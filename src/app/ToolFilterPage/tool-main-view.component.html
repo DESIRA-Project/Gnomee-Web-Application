@@ -1,0 +1,256 @@
+<!--
+<div class="card kbtDesktop bg-transparent" style="border:0px solid rgba(0, 0, 0, 0.125);">
+
+    <div *ngIf="_parent !== null && _parent.finishedLoading() && dataFetched; else spinnerBlock" class="card-body p-0">
+        <div class="card mb-3  border-light shadow-lg" *ngFor="let tool of data;let i = index">
+            <div class="row">
+                <div class="col">
+                    <div class="card-body p-3 clearfix bg-transparent container">
+
+                        <div class="row">
+                            <div class="col-1 container" >
+                                <div class="row" [ngStyle]="{'padding-left': ( 50*(3 - tool.domains.length) / 2) + 2 + '%'}">
+                                    <div class="col-1" *ngFor="let domain of tool.domains">
+                                        <img class="float-left mr-2" src="{{getDomainNameImg(domain)}}"
+                                            placement="top" ngbTooltip="{{'Domain: ' + getDomainName(domain)}}"
+                                            width="{{pageData.img_settings.w}}"
+                                            height="{{pageData.img_settings.h}}" />
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-11 container">
+                                <div class="row">
+                                    <div class="col h5 text-primary mb-0 "
+                                        [ngStyle]="{'cursor': 'pointer'}">
+                                        <a (click)="openToolDetailedViewPage(tool.id)" style="color:#089C89;">
+                                            {{tool.name}}</a>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col mb-0 text-secondary font-xs">{{tool.description}}</div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="d-none card-footer px-3 py-2" style="cursor:'pointer'">
+                        <a (click)="openToolDetailedViewPage(tool.id)" class="font-xs btn-block text-secondary">View More
+                            <i class="fa fa-angle-right float-right font-lg"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <ng-template #spinnerBlock>
+        <div class="card-body" *ngIf="_parent.finishedLoading() === false || !dataFetched">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-sm-auto">
+                        <div class="spinner-border" role="status">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+
+
+    <div class="" style="padding-top:2%"
+        *ngIf="lastQueryReturnedData() === true && _parent !== null && _parent.finishedLoading() && dataFetched">
+        <navigation [parent]="this.getParent()"></navigation>
+    </div>
+</div>
+
+
+<div class="kbtMobile">
+    <div class="card" *ngIf="_parent !== null && _parent.finishedLoading() && dataFetched;else spinnerBlockMobile">
+        <div>
+
+            <div class="card mb-3" *ngFor="let tool of data;let i = index">
+                <div class="row">
+                    <div class="col">
+                        <div class="card-body p-3 clearfix toolCard">
+                            &lt;!&ndash;<div class="container">
+                                <div class="row toolInfoSpacing">
+                                    <div class="col-1-auto">
+                                        <i class="fa fa-cogs p-2  mr-1 float-left fa-xs"
+                                            style="color:'white';background-color: #007628!important;"></i>
+                                    </div>
+
+                                    <div class="col-0" *ngIf="tool.name.length < 31">
+                                        <div class="text-primary mb-0 mt-1"
+                                            [ngStyle]="{'cursor': tool.url.trim().length === 0 ? 'auto' : 'pointer'}"><a
+                                                (click)="openBrowserTab(tool.url)" style="color:#007628;">
+                                                {{tool.name}}
+                                            </a></div>
+                                    </div>
+
+
+                                    <div class="col-0" *ngIf="tool.name.length > 31">
+                                        <div class="text-primary mb-0 mt-1 toolNameWrapper"><a href="{{tool.url}}"
+                                                style="color:#007628;">
+                                                <div class="toolName">
+                                                    {{tool.name}}
+                                                </div>
+                                            </a></div>
+                                    </div>
+
+
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-0">
+                                        <div class="text-muted font-weight-bold font-xs">{{tool.description}}</div>
+                                    </div>
+                                </div>
+                            </div>&ndash;&gt;
+                            <div class="row">
+                                <div class="col-3 container">
+                                    <div class="row"  [ngStyle]="{'padding-left': ( 50*(3 - tool.domains.length) / 2) + 2 + '%'}">
+                                        <div class="col-0" *ngFor="let domain of tool.domains">
+                                            <img class="float-left" [ngClass]="{'mr-2': tool.domains.length === 1 }"
+                                            [ngClass]="{'mr-0': tool.domains.length === 3 }"
+                                            [ngClass]="{'mr-1': tool.domains.length === 2 }"
+
+                                            src="{{getDomainNameImg(domain)}}"
+                                                placement="top" ngbTooltip="{{'Domain: ' + getDomainName(domain)}}"
+                                                width="{{pageData.img_settings.w}}"
+                                                height="{{pageData.img_settings.h}}" />
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-9 container">
+                                    <div class="row">
+                                        <div class="col h5 text-primary mb-0 " *ngIf="tool.name.length < 31"
+                                            [ngStyle]="{'cursor': 'pointer'}">
+                                            <a (click)="openToolDetailedViewPage(tool.id)" style="color:#089C89;">
+                                                {{tool.name}}</a>
+                                        </div>
+
+&lt;!&ndash;                                        <div class="col h5 text-primary mb-0 " *ngIf="tool.name.length >= 31"
+                                            [ngStyle]="{'cursor': tool.url.trim().length === 0 ? 'auto' : 'pointer'}">
+                                            <a (click)="openBrowserTab(tool.url)" class="toolNameWrapper" style="color:#007628;">
+                                                {{tool.name}}</a>
+                                        </div>
+                                    &ndash;&gt;
+
+
+                                        <div class="col" *ngIf="tool.name.length >= 31">
+                                            <div class="h5 text-primary mb-0  toolNameWrapper"><a (click)="openToolDetailedViewPage(tool.id)"
+                                                    style="color:#089C89;">
+                                                    <div class="toolName">
+                                                        {{tool.name}}
+                                                    </div>
+                                                </a></div>
+                                        </div>
+
+
+
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col text-muted  font-weight-bold font-xs">{{tool.description}}
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="d-none card-footer px-3 py-2">
+                            <a (click)="openToolDetailedViewPage(tool.id)" class="font-xs btn-block text-secondary">View More
+                                <i class="fa fa-angle-right float-right font-lg"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer p-1">
+            <navigation [parent]="this.getParent()"></navigation>
+        </div>
+    </div>
+
+    <ng-template #spinnerBlockMobile>
+        <div class="card-body" *ngIf="_parent.finishedLoading() === false || !dataFetched">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-0">
+                        <div class="spinner-border" role="status">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+
+</div>
+-->
+
+
+<div *ngIf="_parent !== null && _parent.finishedLoading() && dataFetched">
+
+  <!-- For each tool -->
+  <div *ngFor="let tool of data; let i = index">
+
+    <!-- Card -->
+    <div class="card shadow" (click)="openToolDetailedViewPage(tool.id)">
+
+      <!-- Card body -->
+      <div class="card-body">
+
+        <div class="d-flex justify-content-between">
+
+          <!-- Tool name -->
+          <div class="d-flex mb-1">
+            <span class="toolName kbt-green" [title]="tool.name">
+              {{ tool.name }}
+            </span>
+          </div>
+
+          <!-- Domains -->
+          <div>
+            <img *ngFor="let domain of tool.domains"
+                 [src]="getDomainNameImg(domain)"
+                 [width]="pageData.img_settings.w"
+                 [height]="pageData.img_settings.h"
+                 class="mx-2"
+                 placement="top" ngbTooltip="{{'Domain: ' + getDomainName(domain)}}"
+            >
+          </div>
+
+        </div>
+
+        <!-- Description -->
+
+        <div class="toolDescription text-secondary">
+          {{ tool.description }}
+        </div>
+
+
+    </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<div class="mt-5" *ngIf="lastQueryReturnedData() === true && _parent !== null && _parent.finishedLoading() && dataFetched">
+  <navigation [parent]="this.getParent()"></navigation>
+</div>
+
+
+<!-- Loading spinner -->
+<div *ngIf="!(_parent !== null && _parent.finishedLoading() && dataFetched)"
+     class="d-flex justify-content-center">
+  <div class="spinner-border" role="status"></div>
+</div>

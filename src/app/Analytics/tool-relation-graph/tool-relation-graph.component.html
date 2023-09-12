@@ -1,0 +1,76 @@
+<div class="container">
+
+  <div class="row">
+    <div class="col">
+      <p class="font-weight-bold text-center">{{this.title}}</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <p class="font-weight-light text-center">{{this.description}}</p>
+    </div>
+  </div>
+
+  <form>
+    <div class="mt-2 form-row justify-content-center">
+      <div class="col-lg-4 text-center">
+
+        Select Domain
+
+        <!--Dropdown-->
+        <div class="dropdown d-inline-block mx-3">
+
+          <button class="btn btn-secondary dropdown-toggle filter" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{this.currentDomain}}
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <button *ngFor="let domain of domains" (click)="filter(domain)" class="{{(this.currentDomain === domain) ? 'dropdown-item active' : 'dropdown-item'}}">
+              {{domain}}
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Break lines at breakpoint smaller than lg -->
+      <div class="w-100 d-lg-none d-block mt-2"></div>
+
+      <div class="col-lg-4 text-center my-auto">
+        <div class="form-check form-switch">
+          <input [checked]="showingDigitalTechnologies" (click)="alterDigitalTechnologies()" class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+          <label class="form-check-label" for="flexSwitchCheckDefault">Show Digital Technologies</label>
+        </div>
+      </div>
+
+    </div>
+  </form>
+
+  <!--
+    <div class="row mt-3">
+      <div class="col d-flex justify-content-center">
+        <a href="javascript:void(0)" *ngIf="showingDigitalTechnologies" (click)="hideDigitalTechnologies()">
+          <p class="font-weight-light text-center">Hide Digital Technologies</p>
+        </a>
+        <a href="javascript:void(0)" *ngIf="!showingDigitalTechnologies" (click)="showDigitalTechnologies()">
+          <p class="font-weight-light text-center">Show Digital Technologies</p>
+        </a>
+      </div>
+    </div>
+  -->
+
+  <div class="row mt-3">
+    <div class="col justify-content-center">
+      <div class="container" #chart *ngIf="dataReady">
+        <figure id="{{this.chartId}}"></figure>
+      </div>
+      <div *ngIf="!dataReady" class="d-flex justify-content-center">
+        <div class="spinner-border" role="status">
+          <span class="sr-only" id="loading"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>

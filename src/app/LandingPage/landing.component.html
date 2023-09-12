@@ -1,0 +1,110 @@
+<div class="c-wrapper  " *ngIf="pageData!== null" (keyup.enter)="performQuery()">
+
+<!--    <header class="c-header border-0 kbtHeader" >
+        <div class="row logoDiv">
+            <img class="logoImg" src="{{pageData.logo.file}}" >
+        </div>
+      </header> -->
+
+  <a *ngIf="!isUserAuthenticated" class="sign-in" href="/kbt/signin">
+    Sign In
+  </a>
+
+    <div class="c-body textShadow mainContent" style="background-color: {{pageData.colors.background}};">
+        <main  class="container h-100 align-middle p-5">
+
+            <div class="row align-items-center justify-content-center maincontainer">
+
+                <div class="container">
+
+                    <div class="row justify-content-center no-gutters welcome">
+                        <div class="col-sm-auto">
+                            <span style="color:{{pageData.colors.welcome}};">Welcome to
+                            </span>
+                        </div>
+                    </div>
+
+
+<!--                    <div class="row justify-content-center no-gutters description">
+                        <div class="col-0" >
+                            <span
+                                style="color:{{pageData.colors.description}};">{{pageData.text.description}}
+                            </span>
+                        </div>
+                    </div> -->
+                    <div class="row justify-content-center no-gutters description">
+                        <div class="col-0" class="mainLogoImg">
+                            <img src="{{pageData.mainlogo.file}}"  height="80%" style="max-height:100%; height:auto;"/>
+                        </div>
+                    </div>
+
+                    <div class="row justify-content-center welcome_kbt smallTopSpace">
+                        <div class="col-0">
+                            <span style="color:{{pageData.colors.title}};">The DESIRA knowledge base of potential Digital Game Changers in Rural Areas
+                            </span>
+                        </div>
+                    </div>
+
+
+                    <div class="row justify-content-center no-gutters smallTopSpace">
+
+                        <div class="col-12 col-md-8">
+
+                            <div class="input-group no-gutters">
+
+
+                                <input type="search" action="." id="search" name="search"
+                                placeholder="{{pageData.text.searchPlaceholder}}"
+                                [(ngModel)]="searchText"
+                                class="form-control search-font">
+
+                                <span class="landingSearchButton input-group-prepend">
+                                    <button type="button" class="btn d-flex align-items-center"
+                                    (click)="performQuery()"
+                                    style="background-color: #07C19A; color: white;"
+                                    [disabled]="searchText == null || searchText.trim().length === 0"
+
+                                    >
+                                        <span class="cil-search btn-icon mr-2" ></span>Search</button></span>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                    <div class="row justify-content-sm-center no-gutters  landingLinks smallTopSpace">
+                        <div class="col-2 col-md-3 externalLinks">
+                            <a href="{{pageData.links[0].url}}" style="color:{{pageData.colors.links}};">{{pageData.links[0].text}}</a>
+                        </div>
+
+                        <div class="col-7 col-md-3 externalLinks">
+                            <a href="{{pageData.links[1].url}}" style="color:{{pageData.colors.links}};">{{pageData.links[1].text}}</a>
+                        </div>
+
+                        <div class="col-3 col-md-3 externalLinks">
+                            <a href="{{pageData.links[2].url}}" style="color:{{pageData.colors.links}};">{{pageData.links[2].text}}</a>
+                        </div>
+
+
+                    </div>
+
+                  <!-- Top Terms -->
+                  <div class="row justify-content-sm-center no-gutters  landingLinks smallTopSpace">
+                    <span class="top-search-terms-title">Other users have searched for: </span>
+                    <span *ngFor="let term of topTerms"
+                          (click)="onBadgeClick(term)"
+                          placement="top" [ngbTooltip]="'Search for \'' + term + '\''"
+                          class="ml-2 badge top-search-term">
+                      {{term}}
+                    </span>
+                  </div>
+
+
+                </div>
+            </div>
+        </main>
+    </div>
+    <cookie-banner></cookie-banner>
+    <kbt-footer></kbt-footer>
+
+</div>

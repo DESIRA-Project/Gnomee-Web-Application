@@ -1,0 +1,43 @@
+<div class="dropdown" *ngIf="dataFetched">
+    <div class="container" *ngIf="!isMobile();else mobileBlock">
+        <div class="row justify-content-start">
+            <div class="col-sm-auto">
+                Sorting By
+            </div>
+            <div class="col-0">
+                <button  class="btn btn-secondary btn-sm dropdown-toggle"
+                    type="button" id="sortingOptionsMenuButton" data-toggle="dropdown" aria-expanded="false">
+                    {{options[selectedOption]}}
+                </button>
+                <div class="dropdown-menu" aria-labelledby="sortingOptionsMenuButton">
+                    <a class="dropdown-item" target="_blank" *ngFor="let option of options; let i = index"
+                        (click)="onOptionClicked(i)">{{option}}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<ng-template #mobileBlock>
+
+    <div class="container">
+        <div class="row justify-content-start">
+            <div class="col-sm-auto sortingTextSize">
+                Sorting By
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <button class="btn btn-secondary btn-sm dropdown-toggle"
+                    type="button" id="sortingOptionsMenuButton" data-toggle="dropdown" aria-expanded="false">
+                    {{options[selectedOption]}}
+                </button>
+                <div class="dropdown-menu" aria-labelledby="sortingOptionsMenuButton">
+                    <a class="dropdown-item" target="_blank" *ngFor="let option of options; let i = index"
+                        (click)="onOptionClicked(i)">{{option}}</a>
+                </div>
+            </div>
+       </div>
+    </div>
+</ng-template>

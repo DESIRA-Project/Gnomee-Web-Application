@@ -1,0 +1,99 @@
+<div class="container">
+  <form>
+    <div class="form-row justify-content-center mb-lg-n3">
+
+      <!-- From Date -->
+      <div class="col col-lg-3 mx-2">
+        <div class="form-group">
+          <div class="input-group">
+            <label for="dpFromDate" class="d-none d-md-inline my-auto">From</label>
+            <input #dpFromDate
+                   id="dpFromDate"
+                   class="form-control ml-3" placeholder="yyyy-mm-dd"
+                   name="dpFromDate"
+                   [value]="formatter.format(fromDate)"
+                   (input)="fromDate = validateInput(fromDate, dpFromDate.value)">
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary calendar" (click)="datepicker.toggle()" type="button">
+                <i class="far fa-calendar-alt"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Calendar Popup -->
+      <div class="form-group">
+        <div class="input-group popup">
+          <input name="datepicker"
+                 style="visibility:hidden"
+                 class="form-control"
+                 ngbDatepicker
+                 #datepicker="ngbDatepicker"
+                 [autoClose]="'outside'"
+                 [placement]="'top'"
+                 (dateSelect)="onDateSelection($event)"
+                 [displayMonths]="2"
+                 [dayTemplate]="t"
+                 outsideDays="hidden"
+                 [startDate]="fromDate!"
+                 [minDate]="initialFromDate!"
+                 [maxDate]="initialToDate!"
+                 tabindex="-1">
+          <ng-template #t let-date let-focused="focused" let-disabled="disabled">
+        <span class="custom-day"
+              [class.focused]="focused"
+              [class.range]="isRange(date)"
+              [class.faded]="isHovered(date) || isInside(date)"
+              [class.text-muted]="disabled"
+              (mouseenter)="hoveredDate = date"
+              (mouseleave)="hoveredDate = null">
+          {{ date.day }}
+        </span>
+          </ng-template>
+        </div>
+      </div>
+
+
+      <!-- To Date -->
+      <div class="col col-lg-3 mx-2">
+        <div class="form-group">
+          <div class="input-group">
+            <label for="dpToDate" class="d-none d-md-inline my-auto">To</label>
+            <input #dpToDate
+                   id="dpToDate"
+                   class="form-control ml-3" placeholder="yyyy-mm-dd"
+                   name="dpToDate"
+                   [value]="formatter.format(toDate)"
+                   (input)="toDate = validateInput(toDate, dpToDate.value)">
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary calendar" (click)="datepicker.toggle()" type="button">
+                <i class="far fa-calendar-alt"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Break lines at lg breakpoint and smaller -->
+      <div class="w-100 d-lg-none d-block"></div>
+
+      <div class="col-auto ml-lg-3">
+
+        <div class="row justify-content-center justify-content-lg-start">
+          <div class="col-auto">
+            <button (click)="filter()" class="btn btn-primary filter">Filter</button>
+          </div>
+          <div class="col-auto">
+            <button (click)="reset()" class="btn btn-secondary reset">Reset</button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </form>
+</div>

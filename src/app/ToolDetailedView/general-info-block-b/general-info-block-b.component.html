@@ -1,0 +1,46 @@
+<div class="card mb-0 border-white mb-2">
+  <div class="card-body">
+
+    <div class="row">
+
+      <div class="col-12 col-lg">
+        <!-- Target users -->
+        <div class="attributeName">Target Users</div>
+        <div class="attributeValue">{{ targetUsers.data.data }}</div>
+      </div>
+
+      <div class="col-12 col-lg">
+        <!-- Maturity level -->
+        <div class="attributeName">Maturity Level</div>
+        <div class="attributeValue">{{ maturityLevel.data.data }}</div>
+      </div>
+
+    </div>
+
+    <div class="row">
+
+      <!-- Requires internet to operate -->
+      <div class="col-12 col-lg">
+        <div class="attributeName">Digital Technology Used </div>
+        <div class="attributeValue mb-1">{{ digitalTechnologyUsed.data.data }}</div>
+        <horizontal-attribute-list [pageData]="pageData" [showAttributeName]="false" [parent]="this" [data]="digitalTechnologies"></horizontal-attribute-list>
+      </div>
+
+      <!-- Uses sensitive data -->
+      <div class="col-12 col-lg">
+        <div class="attributeName">Uses Sensitive Data</div>
+        <div class="attributeValue">{{ usesSensitiveData.data.data }}</div>
+      </div>
+
+
+    </div>
+
+    <div class="row">
+
+
+
+
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,42 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <p class="font-weight-bold text-center">{{title}}</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <p class="font-weight-light text-center">{{description}}</p>
+    </div>
+  </div>
+</div>
+
+
+<div class="container" #charts *ngIf="idsReady">
+  <div class="row justify-content-center" *ngFor="let row of this.idsPerRow">
+    <div class="col-lg-4" *ngFor="let id of row">
+      <figure id="{{id}}"></figure>
+    </div>
+  </div>
+
+  <div class="row justify-content-center" *ngIf="this.idsPerRow.length === 0">
+    <div class="col">
+      <figure id="{{emptyPiechartId}}"></figure>
+    </div>
+  </div>
+
+</div>
+
+
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <app-ngbd-datepicker-range-popup [fromDate]="this.fromDate"
+                                       [toDate]="this.toDate"
+                                       (newFilter)="search()"
+                                       (resetEvent)="ngOnInit()">
+      </app-ngbd-datepicker-range-popup>
+    </div>
+  </div>
+</div>

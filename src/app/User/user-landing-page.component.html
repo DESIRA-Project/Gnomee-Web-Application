@@ -1,0 +1,42 @@
+<div>
+    <div class="c-wrapper h-100">
+
+        <header class="c-header border-1 kbtHeader sticky-top" style="display:unset;">
+            <div>
+
+                <kbt-navbar [currentPage]="'digital-tool-suggestion'"></kbt-navbar>
+            </div>
+        </header>
+
+        <div class="c-body mainContent h-100" style="background-color: '#d1d1d124';">
+
+            <main>
+
+                <kbt-breadcrumb [currentPage]="'digital-tool-suggestion'" [hasGapBottom]="true" [setController]="this"></kbt-breadcrumb> 
+
+                
+                <div class="container-fluid p-0 h-100 vh-100" *ngIf="tokenFetched">
+                    <div class="row h-100">
+<!--                        <div class="col-md-1 col-sm-3 col-lg-1 h-100">
+                        --><div class="col-2 col-md-2 h-100">
+                             <user-function-list [setView]="getCurrentUserView()" [setParent]="this"></user-function-list>
+                        </div>
+
+                        <div class="col-10 col-md-9 h-100" style="padding-top:2%;overflow-y: auto;padding-left:5%">
+
+<!--                        <div class="col-md-11 col-sm-8 col-lg-11  h-100" style="padding-top:2%;overflow-y: auto;padding-left:7%"> -->
+                             <user-function-content [setView]="getCurrentUserView()" [setParent]="this" [setToken]="getToken()"></user-function-content>
+                        </div>
+
+                    </div>
+                </div>
+
+
+            </main>
+        </div>
+    </div>
+</div>
+
+
+<cookie-banner></cookie-banner>    
+<kbt-footer></kbt-footer>

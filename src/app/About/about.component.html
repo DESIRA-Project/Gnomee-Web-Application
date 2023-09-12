@@ -1,0 +1,98 @@
+<div>
+    <div class="c-wrapper" *ngIf="pageData !== null">
+
+        <header class="c-header border-1 kbtHeader sticky-top" *ngIf="pageData !== null" style="display:unset;">
+            <div>
+                 <kbt-navbar [currentPage]="'About'"></kbt-navbar>
+            </div>
+        </header>
+
+        <div class="c-body textShadow mainContent" style="background-color: {{pageData.colors.background}};">
+            <main>
+                <kbt-breadcrumb [currentPage]="'about'"></kbt-breadcrumb>
+
+                <div  class="container h-100 align-middle p-5">
+                <div class="row align-items-center justify-content-center maincontainer">
+
+                    <div class="container">
+                        <div class="card p-4 shadow-lg">
+                            <div class="card-body">
+                                <h4 class="contentTitle"> About </h4><br>
+                                <div class="content">
+
+
+
+                                    DESIRA Gnomee offers an online knowledge base of Digital Tools that can
+                                    act as potential Digital Game Changers in rural areas, agriculture and forestry.
+
+                                    The inventory is initiated with around 700 Digital Tools that have been collected in
+                                    the context of the DESIRA H2020 Research Project, by the project partners. These
+                                    tools, are classified by a number of categories including the following:
+                                    <ul>
+                                        <li>Domain / Sub-domain / Application Scenario </li>
+
+                                        <li>Digital Technologies used by the Tool </li>
+
+                                        <li>Physical Digital Connection </li>
+
+                                        <li>Countries, in which the tool is being used </li>
+                                    </ul>
+                                    <br>
+                                    <div class="content">
+
+                                        Gnomee allows its users to perform full text search and / or
+                                        filter them based on any of the above classifications, thus enabling quick
+                                        identification of tools of interest. It also supports browsing facility based on
+                                        the above
+                                        classifications and interactive visualisations of the available data.
+                                    </div>
+
+                                    <br>
+
+                                    <h4 class="contentHeader">Disclaimer</h4>
+                                    <br>
+                                    <div class="content">
+
+                                        This tool provides aggregated information and related metadata collected by
+                                        third parties within the context of WP1: “Conceptualising and Mapping Digital
+                                        Game Changers” of the DESIRA Research Project. DESIRA project and Athena
+                                        Research Center are not responsible or liable for any false, inaccurate,
+                                        inappropriate or incomplete information presented herein
+                                    </div>
+                                    <br>
+                                    <h4 class="contentHeader">Acknowledgements</h4>
+                                    <br>
+                                    <div class="content">
+                                        The compilation of the survey for collecting the Digital Tools, their
+                                        classification and the curation of the collected input took place in T1.2 and
+                                        T1.3 of WP1 by the CNR colleagues with the support and feedback of all project’s
+                                        partners.
+                                    </div>
+                                    <br>
+                                    <h4 class="contentHeader">Attributions</h4>
+                                    <br>
+                                    <div class="content">
+                                        <ul>
+                                            <li>Background photo in the front page by <a href="https://unsplash.com/@isakengstrom?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Isak Engström</a> on <a href="https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>.</li>
+                                            <li>Icons used in the results page are  made by <a
+                                                        href="https://www.freepik.com" title="Freepik">Freepik</a> from
+                                                    <a href="https://www.flaticon.com/"
+                                                        title="Flaticon">www.flaticon.com</a>.
+                                            </li>
+                                            <li>Charts are made by <a href="https://www.highcharts.com/">www.highcharts.com</a> under a  Creative Commons Attribution-NonCommercial 3.0 license.
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</div>
+
+<cookie-banner></cookie-banner>
+<kbt-footer></kbt-footer>

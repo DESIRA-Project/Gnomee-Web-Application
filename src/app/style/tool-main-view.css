@@ -1,0 +1,68 @@
+.kbtMobile{
+    display:none;
+}
+
+.toolCard{
+    font-size:100px;
+}
+
+@media screen and (max-width: 800px) {
+    .kbtDesktop{
+        display:none;
+    }
+
+    .kbtMobile{
+        display:unset;
+    }
+
+    .toolCard{
+        font-size:15px;
+    }
+
+    .toolSpacing{
+        padding-bottom:3%;
+    }
+
+    .toolNameWrapper {
+        position: relative;
+        width: 170px;
+        overflow: auto;
+        overflow-y: hidden;
+    }
+
+    .toolName {
+        /*white-space: nowrap;*/
+        /*display:inline-block;*/
+    }
+}
+
+.card {
+  cursor: pointer;
+  transition: all 0.25s ease-in-out;
+}
+
+.card:hover {
+  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.165) !important;
+  border: 1px solid #089C89;
+}
+
+.toolName {
+  font-size: 1.25rem;
+  font-weight: bold;
+  max-width: 800px;
+}
+
+.toolDescription {
+
+}
+
+.viewMore {
+  margin-left: 1rem;
+  border-left: 1px solid #6c757d;
+  color: #6c757d;
+  font-weight: 300;
+  font-size: 0.75rem;
+  padding-left: 1rem;
+  display: flex;
+  align-items: center;
+}

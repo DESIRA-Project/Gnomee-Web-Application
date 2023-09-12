@@ -1,0 +1,151 @@
+<div #view *ngIf="chartConfig !== null">
+     <div *ngIf="file !== null; else mostVisitedDTSView">
+        <div class="container-fluid p-0">
+            <div class="row justify-content-center g-0">
+                <div class="col-0" style="padding-top:10px;" *ngIf="data !== null">
+                    <img src="{{file}}" class="toolImg"/>
+
+                    </div>
+                <div class="col-7 p-1"
+                    [ngClass]="{'col-sm-5': data !== null && data.repr !== null && data.repr.length <= 10 }"
+                    [ngClass]="{'col-sm-6': data !== null && data.repr !== null && data.repr.length > 10 && data.repr.length <= 20 }"
+                    [ngClass]="{'col-sm-8': data !== null && data.repr !== null && data.repr.length > 20 && data.repr.length <= 30  }"
+                    [ngClass]="{'col-sm-8': data !== null && data.repr !== null && data.repr.length > 30 && data.repr.length <= 40 }"
+                    >
+                    <ng-container *ngTemplateOutlet="standardCounterView"></ng-container>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<!-- Most visited digital tools -->
+<ng-template #mostVisitedDTSView>
+  <div *ngIf="chartConfig.type === 'most-visited-dts'; else standardView">
+
+    <!-- Loading spinner... -->
+    <div *ngIf="!data" class="row justify-content-center">
+      <div class="col-sm-auto">
+        <div class="spinner-border" role="status">
+        </div>
+      </div>
+    </div>
+
+    <!-- After loading is finished -->
+    <div *ngIf="data">
+
+      <!-- Title -->
+      <div class="d-flex justify-content-center mb-2">
+        <span class="font-weight-bold">
+          Most Visited Digital Tools
+        </span>
+      </div>
+
+      <!-- Tools-->
+      <div class="d-flex flex-wrap" style="justify-content: space-evenly">
+        <div *ngFor="let dt of data.data; let i = index" class="most-visited-tool mb-2">
+
+          <div class="d-flex flex-column">
+
+            <a [routerLink]="['..', 'tool', dt.id]" target="_blank" style="color: #695988">
+              <mat-icon>filter_{{i+1}}</mat-icon>
+            </a>
+
+            <!-- Title-->
+            <a [routerLink]="['..', 'tool', dt.id]" target="_blank" class="most-visited-tool-title">
+              <span>{{ dt.name }}</span>
+              <mat-icon style="font-size: 1rem; position: relative; bottom: -3px">open_in_new</mat-icon>
+            </a>
+
+            <!-- Count -->
+            <span class="most-visited-tool-count"> {{dt.count}} visits </span>
+
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+</ng-template>
+
+<ng-template #standardView>
+    <div class="container p-0">
+        <div class="row text-center p-0">
+            <div class="col align-self-center">
+                <div class="row"  *ngIf="data !== null">
+                    <div class="col">
+                        <span class="font-weight-bold">
+                            {{data.repr}}
+                        </span>
+                    </div>
+                </div>
+
+                <div class="row"  *ngIf="data !== null && (data.description !== '')">
+                    <div class="col">
+                     <span style="display:inline-block;height:45px;"> {{data.description}} </span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <figure id="{{chartConfig.id}}"></figure>
+                        <div *ngIf="chartConfig === null || chartIsReady === false">
+                            <div class="container">
+                                <div class="row justify-content-center">
+                                    <div class="col-sm-auto">
+                                        <div class="spinner-border" role="status">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                       </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+
+<ng-template #standardCounterView>
+    <div class="container p-0">
+        <div class="row text-center p-0">
+            <div class="col ">
+                <div class="row"  *ngIf="data !== null">
+                    <div class="col">
+                        <span class="font-weight-bold">
+                            {{data.repr}}
+                        </span>
+                    </div>
+                </div>
+
+                <div class="row"  *ngIf="data !== null && (data.description !== '')">
+                    <div class="col">
+                     <span style="display:inline-block;height:45px;"> {{data.description}} </span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <figure  id="{{chartConfig.id}}"></figure>
+                        <div *ngIf="chartConfig === null || chartIsReady === false">
+                            <div class="container">
+                                <div class="row justify-content-center">
+                                    <div class="col-sm-auto">
+                                        <div class="spinner-border" role="status">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                       </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

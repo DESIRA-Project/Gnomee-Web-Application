@@ -1,0 +1,253 @@
+<div class="kbtDesktop"  (keydown.enter)="performQuery();">
+    <div class="card">
+        <div class="card-body">
+            <div class="container" style="padding-top:1%;">
+                <div class="row" *ngIf="alert !== null">
+                    <div class="col">
+                        <div id="kbtAlert" class="alert alert-warning alert-dismissible fade show" role="alert">
+                            {{alert.msg}}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" *ngIf="noResultsAlert !== null">
+                    <div class="col">
+                        <div id="kbtEmptyResultsAlert" class="alert alert-success " role="alert">
+                            {{noResultsAlert.msg}}
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row justify-content-center">
+                    <div class="col-sm-auto">
+                        <div class="dropdown" *ngIf="selectedField">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                                {{selectedField.name}}
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" *ngFor="let field of searchFieldOptions"
+                                    (click)="onSearchFieldChange(field)">
+                                    {{field.name}}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-9 col-md-auto" style="padding-left:1%;">
+                        <div class="form-group">
+                            <input [(ngModel)]="filledText" class="form-control" placeholder="Search term">
+                        </div>
+                    </div>
+
+                    <div class="col-md-auto" (click)="addExpression();">
+<!--                        <img src="assets/plus-circle.svg" width="30" height="30" /> -->
+                        <i class="fa fa-plus-circle fa-2x" style="color:'green'"></i>
+                    </div>
+                </div>
+
+                <div class="row justify-content-center" *ngFor="let expr of expressions.exprs; let i = index">
+                    <div class="col-sm-auto" *ngIf="expr">
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button"
+                                id="dropdownMenuButton_{{i}}" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false" >
+                                {{expr.field.name}}
+                            </button>
+                            <div class="dropdown-menu" attr.aria-labelledby="{{'dropdownMenuButton_'+i}}">
+                                <a class="dropdown-item" *ngFor="let field of searchFieldOptions;let j = index"
+                                    (click)="modifyExpressionSearchField(i,j)">
+                                    {{field.name}}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-9 col-md-auto" style="padding-left:1%;">
+                        <div class="form-group">
+                            <input (ngModelChange)="termSet(i,$event)" [(ngModel)]="expr.value" class="form-control"
+                                id="searchTerm_{{i}}" placeholder="Search term">
+                        </div>
+                    </div>
+
+                    <div class="col-md-auto" (click)="removeExpression(i);">
+<!--                        <img src="assets/minus-circle.svg" width="30" height="30" /> -->
+                        <i class="fa fa-minus-circle fa-2x" style="color:'green'"></i>
+                    </div>
+                </div>
+
+
+                <div class="row justify-content-center" style="padding-bottom:2%;">
+                    <div class="col-sm-auto">
+                        <span>Match</span>
+                    </div>
+                    <form class="form-inline">
+                        <div class="form-group">
+                            <input type="radio" name="flexRadioDefaultDesktop"
+                                (click)="selectQueryOperator(ExpressionOperator.MATCH_ANY)" class="form-check-input"   style="cursor:pointer;"
+                                checked />
+                            <label class="form-check-label" for="flexRadioDefaultDesktop1"   style="cursor:pointer;">
+                                Any Condition
+                            </label>
+                        </div>
+                        <div class="form-group mx-sm-4">
+                            <input class="form-check-input " type="radio" name="flexRadioDefaultDesktop"   style="cursor:pointer;"
+                                (click)="selectQueryOperator(ExpressionOperator.MATCH_ALL)" class="form-check-input" />
+                            <label class="form-check-label" for="flexRadioDefaultDesktop2"   style="cursor:pointer;">
+                                All Conditions
+                            </label>
+                        </div>
+
+
+                    </form>
+
+                </div>
+
+
+
+                <div class="row justify-content-center">
+                    <div class="col-sm-auto">
+                        <button type="button" class="btn btn-primary" style="background-color:#007628;"
+                            [disabled]="expressions.exprs.length === 0 && filledText.trim().length === 0"                           
+                            (click)="performQuery()">Search</button>
+                    </div>
+                    <div class="col-sm-auto">
+                        <button type="button" (click)="clearExpressions()" [disabled]="expressions.exprs.length === 0"
+                            class="btn btn-secondary">Clear</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="kbtMobile">
+    <div class="card">
+        <div class="card-body p-2">
+            <div class="container" style="padding-top:1%;">
+                <div class="row" *ngIf="alert !== null">
+                    <div class="col">
+                        <div id="kbtAlert" class="alert alert-warning alert-dismissible fade show" role="alert">
+                            {{alert.msg}}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" *ngIf="noResultsAlert !== null">
+                    <div class="col">
+                        <div id="kbtEmptyResultsAlert" class="alert alert-success " role="alert">
+                            {{noResultsAlert.msg}}
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row justify-content-center">
+                    <div class="col-5-auto">
+                        <div class="dropdown" *ngIf="selectedField">
+                            <button class="btn btn-secondary dropdown-toggle btn-lg btn-block" type="button"
+                                id="_dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false" style="width:110px;">
+                                {{selectedField.name}}
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="_dropdownMenuButton">
+                                <a class="dropdown-item" *ngFor="let field of searchFieldOptions"
+                                    (click)="onSearchFieldChange(field)">
+                                    {{field.name}}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-6" style="padding-left:3%;">
+                        <div class="form-group">
+                            <input [(ngModel)]="filledText" class="form-control" placeholder="Search term">
+                        </div>
+                    </div>
+
+                    <div class="col-0" (click)="addExpression();" style="text-align: center;">
+                        <i class="fa fa-plus-circle fa-2x" style="color:'green'"></i>
+                    </div>
+
+                </div>
+
+                <div class="row" *ngIf="expressions !== null && expressions.exprs.length > 0" style="border-top: 1px dotted black;
+                    padding-top: 21px;">
+
+                </div>
+
+                <div class="row justify-content-center" *ngFor="let expr of expressions.exprs; let i = index">
+                    <div class="col-5-auto" *ngIf="expr">
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle btn-lg btn-block" type="button"
+                                id="dropdownMenuButton_{{i}}" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false" style="width:110px;">
+                                {{expr.field.name}}
+                            </button>
+                            <div class="dropdown-menu" attr.aria-labelledby="{{'dropdownMenuButton_'+i}}">
+                                <a class="dropdown-item" *ngFor="let field of searchFieldOptions;let j = index"
+                                    (click)="modifyExpressionSearchField(i,j)">
+                                    {{field.name}}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                   
+                    <div class="col-6" style="padding-left:3%;">
+                        <div class="form-group">
+                            <input (ngModelChange)="termSet(i,$event)" [(ngModel)]="expr.value" class="form-control"
+                                id="searchTerm_mobile_{{i}}" placeholder="Search term">
+                        </div>
+                    </div>
+
+                    <div class="col-0" (click)="removeExpression(i);">
+<!--                        <img src="assets/minus-circle.svg" width="30" height="30" /> -->
+                            <i class="fa fa-minus-circle fa-2x" style="color:'green'"></i>
+                    </div>
+                </div>
+
+
+                <div class="row" style="padding-bottom:4%;font-size:4vw;">
+                    <div class="col-4">
+                        <span>Match</span>
+                    </div>
+                    <div class="form-check col-4" id="flexRadioDefault">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"
+                            checked (click)="selectQueryOperator(ExpressionOperator.MATCH_ANY)"   style="cursor:pointer;">
+                        <label class="form-check-label" for="flexRadioDefault1"   style="cursor:pointer;">
+                            Any Condition
+                        </label>
+                    </div>
+                    <div class="form-check col-4">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2"   style="cursor:pointer;"
+                            (click)="selectQueryOperator(ExpressionOperator.MATCH_ALL)">
+                        <label class="form-check-label" for="flexRadioDefault2"   style="cursor:pointer;">
+                            All Conditions
+                        </label>
+                    </div>
+                </div>
+
+                <div class="row justify-content-center">
+                    <div class="col-4">
+                        <button type="button" class="btn btn-primary" style="background-color:#007628;"
+                        [disabled]="expressions.exprs.length === 0 && filledText.trim().length === 0" (click)="performQuery()">Search</button>
+                    </div>
+                    <div class="col-4">
+                        <button type="button" (click)="clearExpressions()" [disabled]="expressions.exprs.length === 0"
+                            class="btn btn-secondary">Clear</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

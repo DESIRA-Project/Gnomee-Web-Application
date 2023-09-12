@@ -1,0 +1,124 @@
+<footer class="container-fluid w-100  border py-1 normalSizeFooter kbtFooter  sticky" *ngIf="pageData !== null"
+    style="font-size: {{pageData.font.size}};">
+    <div id="footer" class="container-fluid">
+        <div class="row ">
+            <div class="col-0 smallLeftSpace" >
+                <img class="smallTopSpace" src="{{pageData.eu.file}}" width="{{pageData.eu.w}}"
+                    height="{{pageData.eu.h}}" />
+            </div>
+
+            <div class="col-8 ml-0 noLeftSpace" >
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-4 justify-content-start text-wrap fundingText textStyle smallTopSpace"
+                        >
+                            <span>{{pageData.text.funding}}</span>
+                        </div>
+
+
+                        <div class="col-8 d-flex justify-content-end textStyle navbar-collapse" style="font-size:13px;font-weight: 300;padding-top:5px;">
+                            <ul class="nav">
+                                <li class="nav-item border-right">
+                                    <a class="nav-link" href="{{pageData.text.privacy.link}}">{{pageData.text.privacy.text}}</a>
+                                </li>
+                                <li class="nav-item border-right">
+                                    <a class="nav-link" href="{{pageData.text['terms-of-service'].link}}">{{pageData.text['terms-of-service'].text}}</a>
+                                </li>
+                                <li class="nav-item border-right">
+                                    <a class="nav-link" href="{{pageData.text.about.link}}">{{pageData.text.about.text}}</a>
+                                </li>
+                                <li class="nav-item border-right">
+                                    <a class="nav-link" href="{{pageData.text.contact.link}}">{{pageData.text.contact.text}}</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" target="_blank" (click)="toggleCookiesModal()" href="#">
+                                        {{pageData.text.cookies}}</a>
+                                        
+                                        <span *ngIf="cookiesModalIsOpen">
+                                            <cookie-banner [openFromExternalMediumOption]="true" [cb]="onCookiesModalClose()"></cookie-banner>
+                                        </span>
+                                </li>
+
+                            </ul>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-0 justify-content-end smallTopSpace imgLink">
+                <img src="{{pageData.athena.file}}" width="{{pageData.athena.w}}" height="auto"
+                    (click)="openBrowserTab(pageData.athena.link)"  />
+            </div>
+
+            <div class="col-1 justify-content-end  imgLink" >
+                <img src="{{pageData.desira.file}}" width="{{pageData.desira.w}}" height="auto"
+                    (click)="openBrowserTab(pageData.desira.link)"  style="padding-bottom:10px;padding-top:2px;" />
+            </div>
+
+        </div>
+    </div>
+</footer>
+
+
+
+<footer class="container-fluid w-100  border py-1 mobileSizeFooter textStyle kbtFooter p-0" *ngIf="pageData !== null"
+    >
+    <div id="footer" class="container-fluid">
+        <div class="row">
+            <div class="col-3 p-0 noWrap border-right textInTheCenter">
+                <a class="nav-link" href="{{pageData.text.privacy.link}}">{{pageData.text.privacy.text}}</a>
+            </div>
+
+            <div class="col-2 p-0 border-right textInTheCenter">
+                <a class="nav-link" href="{{pageData.text.about.link}}">{{pageData.text.about.text}}</a>
+            </div>
+
+<!--            <div class="col noWrap textInTheCenter">
+                <a class="nav-link" href="#">{{pageData.text.contact}}</a>
+            </div> 
+        -->
+        <div class="col-3 p-0 border-right noWrap textInTheCenter">
+            <a class="nav-link" href="{{pageData.text.contact.link}}">{{pageData.text.contact.text}}</a>
+        </div> 
+    
+        <div class="col-3 p-0 noWrap textInTheCenter">
+            <a class="nav-link" href="#" (click)="toggleCookiesModal()" target="_blank">{{pageData.text.cookies}}</a>
+
+<!--            <a class="nav-link" target="_blank" (click)="toggleCookiesModal()" href="#">
+                {{pageData.text.cookies}}</a> -->
+                
+<!--                <span *ngIf="cookiesModalIsOpen">
+                    <cookie-banner [openFromExternalMediumOption]="true" [cb]="onCookiesModalClose()"></cookie-banner>
+                </span> -->
+        </div> 
+    
+
+        </div>
+
+        <div class="row border-top smallTopSpace">
+            <div class="col-2 euLogo">
+                <img class="eu"  src="{{pageData.eu.file}}" />
+            </div>
+            <div class="col fundingText">
+                <span>{{pageData.text.funding}}</span>
+            </div>
+        </div>
+
+    <div class="row border-top imgLink smallTopSpace" >
+        <div class="col athenaLogo">
+            <img class="athenaLogo" src="{{pageData.athena.file}}" 
+            (click)="openBrowserTab(pageData.athena.link)"  />
+        </div>
+        <div class="col desiraLogo">
+            <img class="desiraLogo" src="{{pageData.desira.file}}" 
+            (click)="openBrowserTab(pageData.desira.link)"  />
+        </div>
+
+    </div>
+
+    </div>
+</footer>
+
+<user-background-modal ></user-background-modal>

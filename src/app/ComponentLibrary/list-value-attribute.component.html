@@ -1,0 +1,15 @@
+<div class="container p-2">
+
+    <div class="row">
+        <div class="col">
+            <div class="form-group">
+                <form >
+                    <label for="{{data.data.attribute}}TextField">{{data.data.repr}} </label> 
+                    <span *ngFor="let item of data.data.data;  let i = index ">
+                        <input type="text" class="form-control" id="{{data.data.attribute}}_{{i}}" [disabled]="isReadonly">
+                    </span>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

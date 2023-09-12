@@ -1,0 +1,95 @@
+<div class="card p-2 shadow-lg" *ngIf="userCanViewSuggestedTools(); else unadequatePermissionsBlock">
+    <div class="card-header" *ngIf="title !== null">{{title}}</div>
+
+    <div class="card-body">
+        <div class="container">
+
+            <div class="row" *ngIf="alert !== null">
+                <div class="col">
+                    <div  class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{alert.msg}}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row  justify-content-center"  *ngIf="ready;else notReadyBlock">
+            <div class="col-sm-12 col-md-10 responsiveTable" *ngIf="tools.length != 0; else emptyResultsBlock">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                      <th scope="col" class="tableColumnEnum tableColName">#</th>
+                      <th scope="col" class="tableColumn tableColName">Name</th>
+<!--                      <th scope="col" class="tableColumn tableColName">URL</th> -->
+                      <th scope="col" class="tableColumn tableColName">Description</th>
+                      <th scope="col" class="tableColumn tableColName">Status</th>
+                      <th scope="col" class="tableColumn tableColName">Created</th>
+                      <th scope="col" class="tableColumn tableColName">Actions</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let tool of tools; index as i">
+                      <th class="tableColumnEnum tableColValue" scope="row">{{ i + 1 }}</th>
+                      <td class="tableColumn tableColValue"><span ngbTooltip="{{tool.name}}">{{ tool.name ? getLimitedString ( tool.name , 20) : '' }} </span></td> 
+<!--                      <td class="tableColumn tableColValue"><span ngbTooltip="{{tool.url}}">{{ tool.url ? getLimitedString ( tool.url, 8) : '' }}</span></td> -->
+                      <td class="tableColumn tableColValue"><span ngbTooltip="{{tool.description}}">{{ tool.description !== null ? ( tool.description.length > 10 ? getLimitedString (tool.description, 10) : tool.description) : ""}}</span></td>
+                      <td class="tableColumn tableColValue"><span [ngClass]="{'statusAccepted' : tool.status === 'commited', 'statusPending':tool.status === 'pending','statusRejected':tool.status === 'rejected','statusDeleted':tool.status === 'deleted'}">{{ tool.status }}</span></td>
+                      <td class="tableColumn tableColValue">{{ tool.created |  date: 'yyyy-MM-dd h:m:s'}}</td>  
+                      <td class="tableColumn tableColValue">
+                            <div class="btn-group">
+<!--                                  <button  *ngIf="userCanEditSuggestedTool() && tool.status === 'pending'" type="button" class="btn btn-primary ml-2" (click)="editSuggestedTool(i)">Edit</button>
+                                  <button  *ngIf="userCanRemoveSuggestedTool() && tool.status === 'pending'" type="button" class="btn btn-danger ml-2" (click)="deleteSuggestedTool(i)">Delete</button>                       
+                                  <button   type="button" class="btn btn-info ml-2" (click)="viewSuggestedTool(i)">View</button> -->
+                                  <i *ngIf="tool.url.trim().length !== 0" class="fa fa-paper-plane visitURLIcon "  ngbTooltip="Visit external Digital Tool page" (click)="rc.openBrowserTab(tool.url)"></i>
+                                  <i class="fa fa-eye viewIcon ml-2" ngbTooltip="View Tool" (click)="viewSuggestedTool(i)"></i>
+                                  <i  *ngIf="userCanEditSuggestedTool() && tool.status === 'pending'"  class="fa fa-pen ml-2 editIcon" ngbTooltip="Edit Tool" (click)="editSuggestedTool(i)"></i>
+                                  <i *ngIf="userCanRemoveSuggestedTool() && tool.status === 'pending'" class="fa fa-times ml-2 rejectIcon" ngbTooltip="Remove Tool" (click)="deleteSuggestedTool(i)"></i>
+                            </div>
+
+                      </td>
+
+                                          
+                    </tr>
+                    </tbody>
+                  </table>
+
+            </div>
+            <ng-template #emptyResultsBlock>
+              <span>No Digital Tool Suggestions yet.</span>
+              </ng-template>
+  
+
+            </div>
+
+            <ng-template #notReadyBlock>
+              <div class="row justify-content-center" *ngIf="!ready">
+                   <div class="col-6">
+                        <div >
+                            <div class="spinner-border" role="status" style="margin-left:45%;margin-top:20%;">
+                            </div>
+                        </div>
+                   </div>
+             </div>
+            </ng-template>
+        </div>
+    </div>
+
+</div>
+
+<span *ngIf="modalIsOpen">
+  <dynamic-modal [openFromExternalMediumOption]="true" [cb]="onModalClose()" [modalData]="getDynamicContent()" [modalTitle]="getModalTitle()" [closeButtonTextAttribute]="'Cancel'" [modalParent]="this"></dynamic-modal>
+</span>
+
+<span *ngIf="editSuggestedToolModalIsOpen">
+  <dynamic-modal [openFromExternalMediumOption]="true" [cb]="onEditModalClose()" [modalData]="getEditSuggestedToolContent()" [modalTitle]="getEditSuggestedToolModalTitle()" [closeButtonTextAttribute]="'Cancel'" [modalParent]="this" [modalSize]='"lg"' [modalFullHeight]="true"></dynamic-modal>
+</span>
+
+<ng-template #unadequatePermissionsBlock>
+  <div class="card-header" *ngIf="title !== null">{{title}}</div>
+  <div class="card-body">
+        User does not have adequate permissions to view this page
+  </div>            
+</ng-template>
